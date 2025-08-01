@@ -1,104 +1,106 @@
-export type ProjectType = "mobile" | "desktop" | "website"
+export type ProjectType = "mobile" | "desktop" | "website";
 
 export interface Screenshot {
-  id: string
-  name: string
-  file: File
-  url: string
-  category?: string
-  confidence?: number
-  uiElements?: string[]
+  id: string;
+  name: string;
+  file: File;
+  url: string;
+  category?: string;
+  confidence?: number;
+  uiElements?: string[];
 }
 
 export interface TemplateSlot {
-  x: number
-  y: number
-  w: number
-  h: number
-  minW?: number
-  minH?: number
-  maxW?: number
-  maxH?: number
-  isResizable?: boolean
-  isDraggable?: boolean
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  minW?: number;
+  minH?: number;
+  maxW?: number;
+  maxH?: number;
+  isResizable?: boolean;
+  isDraggable?: boolean;
   // Visual Effects
-  rotation?: number
-  zIndex?: number
-  shadow?: "xs" | "sm" | "md" | "lg" | "xl" | "harsh" | "fold"
-  borderRadius?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "full"
-  opacity?: number
+  rotation?: number;
+  zIndex?: number;
+  shadow?: "xs" | "sm" | "md" | "lg" | "xl" | "harsh" | "fold";
+  borderRadius?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "full";
+  opacity?: number;
   // Special Effects
-  deviceFrame?: "iphone" | "android" | "browser"
-  browserFrame?: boolean
-  polaroidFrame?: boolean
-  comicPanel?: boolean
+  deviceFrame?: "iphone" | "android" | "tablet" | "browser";
+  browserFrame?: boolean;
+  polaroidFrame?: boolean;
+  comicPanel?: boolean;
   // Advanced Visual Properties
-  shape?: "rectangle" | "circle" | "hexagon" | "star" | "diamond"
-  neonGlow?: "blue" | "purple" | "pink" | "cyan" | "green" | "orange" | "red"
-  holographicEffect?: boolean
-  borderGlow?: string
-  watercolorEffect?: "blue" | "purple" | "pink" | "green" | "orange" | "yellow"
-  foldEffect?: "valley" | "mountain"
-  isometric?: "top" | "left" | "right" | "front"
-  perspective?: string
-  vinylRecord?: boolean
+  shape?: "rectangle" | "circle" | "hexagon" | "star" | "diamond";
+  neonGlow?: "blue" | "purple" | "pink" | "cyan" | "green" | "orange" | "red";
+  holographicEffect?: boolean;
+  borderGlow?: string;
+  watercolorEffect?: "blue" | "purple" | "pink" | "green" | "orange" | "yellow";
+  foldEffect?: "valley" | "mountain";
+  isometric?: "top" | "left" | "right" | "front";
+  perspective?: string;
+  vinylRecord?: boolean;
   // Layout Properties
-  liquidShape?: boolean
-  morphShape?: string
-  animationDelay?: number
-  parallaxSpeed?: number
-  hoverEffect?: "lift" | "glow" | "rotate" | "scale"
+  liquidShape?: boolean;
+  morphShape?: string;
+  animationDelay?: number;
+  parallaxSpeed?: number;
+  hoverEffect?: "lift" | "glow" | "rotate" | "scale";
   // Content Properties
-  textBlock?: boolean
-  typography?: "swiss" | "modern" | "serif"
-  backgroundColor?: string
+  textBlock?: boolean;
+  typography?: "swiss" | "modern" | "serif";
+  backgroundColor?: string;
   // Interactive Properties
-  connectionTo?: number
-  connectionLines?: number[]
-  speechBubble?: string
-  thoughtBubble?: boolean
-  actionLines?: boolean
-  explosionEffect?: boolean
-  speedLines?: boolean
+  connectionTo?: number;
+  connectionLines?: number[];
+  speechBubble?: string;
+  thoughtBubble?: boolean;
+  actionLines?: boolean;
+  explosionEffect?: boolean;
+  speedLines?: boolean;
+  timelineNode?: boolean;
   // Artistic Properties
-  tornEdges?: boolean
-  vintageFilter?: "sepia" | "warm" | "cool" | "faded"
-  tape?: "top-left" | "top-right" | "bottom" | "corner" | "side" | "top"
-  mirror?: "horizontal" | "vertical" | "both"
+  tornEdges?: boolean;
+  vintageFilter?: "sepia" | "warm" | "cool" | "faded";
+  tape?: "top-left" | "top-right" | "bottom" | "corner" | "side" | "top";
+  mirror?: "horizontal" | "vertical" | "both";
   // Technical Properties
-  blueprintStyle?: boolean
-  measurements?: boolean
-  gridLines?: boolean
-  technicalDrawing?: boolean
-  crossSection?: boolean
-  dimensions?: boolean
-  floorPlan?: boolean
-  elevationView?: boolean
-  detailView?: boolean
+  blueprintStyle?: boolean;
+  measurements?: boolean;
+  gridLines?: boolean;
+  technicalDrawing?: boolean;
+  crossSection?: boolean;
+  dimensions?: boolean;
+  floorPlan?: boolean;
+  elevationView?: boolean;
+  detailView?: boolean;
 }
 
 export interface RealProject {
-  name: string
-  description: string
-  platform: string
-  industry: string
+  name: string;
+  description: string;
+  platform: string;
+  industry: string;
 }
 
 export interface Template {
-  id: string
-  name: string
-  description: string
-  category: string
-  projectTypes: ProjectType[]
-  rows: number
-  cols: number
-  slots: TemplateSlot[]
-  preview: string
-  tags: string[]
-  realProject?: RealProject
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  projectTypes: ProjectType[];
+  rows: number;
+  cols: number;
+  slots: TemplateSlot[];
+  preview: string;
+  tags: string[];
+  realProject?: RealProject;
+  isPremium?: boolean;
 }
 
 export interface ArrangementSlot extends TemplateSlot {
-  id: string
-  screenshot: Screenshot | null
+  id: string;
+  screenshot: Screenshot | null;
 }

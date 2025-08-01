@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template Preview Image Guide</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #f8fafc;
+      }
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+      .template-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+      }
+      .template-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid transparent;
+      }
+      .template-card.premium {
+        border-color: #f59e0b;
+        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      }
+      .template-card.free {
+        border-color: #10b981;
+        background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      }
+      .template-id {
+        font-weight: bold;
+        font-size: 14px;
+        margin-bottom: 8px;
+        color: #374151;
+      }
+      .template-type {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 12px;
+      }
+      .template-type.premium {
+        background: #f59e0b;
+        color: white;
+      }
+      .template-type.free {
+        background: #10b981;
+        color: white;
+      }
+      .search-terms {
+        font-size: 13px;
+        color: #6b7280;
+        margin-bottom: 12px;
+      }
+      .links {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .link {
+        padding: 6px 12px;
+        background: #3b82f6;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 12px;
+        transition: background 0.2s;
+      }
+      .link:hover {
+        background: #2563eb;
+      }
+      .instructions {
+        background: #dbeafe;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+      .stat-card {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      .stat-number {
+        font-size: 32px;
+        font-weight: bold;
+        color: #1f2937;
+      }
+      .stat-label {
+        color: #6b7280;
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>📸 Template Preview Image Guide</h1>
+      <p>Find real pictures for your 50+ templates</p>
+    </div>
+
+    <div class="instructions">
+      <h3>🎯 Quick Instructions:</h3>
+      <ol>
+        <li><strong>Click the links</strong> below to find images</li>
+        <li>
+          <strong>Download</strong> high-quality images (400x300px recommended)
+        </li>
+        <li>
+          <strong>Rename</strong> files to match template IDs (e.g.,
+          "free-simple-grid.jpg")
+        </li>
+        <li>
+          <strong>Place</strong> in
+          <code>public/template-previews/</code> directory
+        </li>
+      </ol>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-number">30</div>
+        <div class="stat-label">Free Templates</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">20</div>
+        <div class="stat-label">Premium Templates</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">51</div>
+        <div class="stat-label">Total Images Needed</div>
+      </div>
+    </div>
+
+    <div class="template-grid">
+      <!-- Free Templates -->
+      <div class="template-card free">
+        <div class="template-id">free-simple-grid</div>
+        <div class="template-type free">Free</div>
+        <div class="search-terms">
+          Search: "website grid layout", "portfolio grid"
+        </div>
+        <div class="links">
+          <a
+            href="https://unsplash.com/s/photos/website-grid"
+            target="_blank"
+            class="link"
+            >Unsplash</a
+          >
+          <a href="https://dribbble.com/tags/grid" target="_blank" class="link"
+            >Dribbble</a
+          >
+        </div>
+      </div>
+
+      <div class="template-card free">
+        <div class="template-id">free-hero-grid</div>
+        <div class="template-type free">Free</div>
+        <div class="search-terms">
+          Search: "hero section website", "landing page hero"
+        </div>
+        <div class="links">
+          <a
+            href="https://unsplash.com/s/photos/hero-section"
+            target="_blank"
+            class="link"
+            >Unsplash</a
+          >
+          <a href="https://dribbble.com/tags/hero" target="_blank" class="link"
+            >Dribbble</a
+          >
+        </div>
+      </div>
+
+      <div class="template-card free">
+        <div class="template-id">free-mobile-storyboard</div>
+        <div class="template-type free">Free</div>
+        <div class="search-terms">
+          Search: "mobile app mockup", "app interface"
+        </div>
+        <div class="links">
+          <a
+            href="https://unsplash.com/s/photos/mobile-app"
+            target="_blank"
+            class="link"
+            >Unsplash</a
+          >
+          <a
+            href="https://dribbble.com/tags/mobile"
+            target="_blank"
+            class="link"
+            >Dribbble</a
+          >
+        </div>
+      </div>
+
+      <div class="template-card free">
+        <div class="template-id">free-dashboard-basic</div>
+        <div class="template-type free">Free</div>
+        <div class="search-terms">
+          Search: "admin dashboard", "analytics dashboard"
+        </div>
+        <div class="links">
+          <a
+            href="https://unsplash.com/s/photos/dashboard"
+            target="_blank"
+            class="link"
+            >Unsplash</a
+          >
+          <a
+            href="https://dribbble.com/tags/dashboard"
+            target="_blank"
+            class="link"
+            >Dribbble</a
+          >
+        </div>
+      </div>
+
+      <div class="template-card free">
+        <div class="template-id">free-ecommerce-grid</div>
+        <div class="template-type free">Free</div>
+        <div class="search-terms">
+          Search: "e-commerce website", "product catalog"
+        </div>
+        <div class="links">
+          <a
+            href="https://unsplash.com/s/photos/ecommerce"
+            target="_blank"
+            class="link"
+            >Unsplash</a
+          >
+          <a
+            href="https://dribbble.com/tags/ecommerce"
+            target="_blank"
+            class="link"
+            >Dribbble</a
+          >
+        </div>
+      </div>
+
+      <div class="template-card free">
+        <div class="template-id">free-portfolio-grid</div>
+        <div class="template-type free">Free</div>
+        <div class="search-terms">
+          Search: "designer portfolio", "creative portfolio"
+        </div>
+        <div class="links">
+          <a
+            href="https://unsplash.com/s/photos/portfolio"
+            target="_blank"
+            class="link"
+            >Unsplash</a
+          >
+          <a
+            href="https://dribbble.com/tags/portfolio"
+            target="_blank"
+            class="link"
+            >Dribbble</a
+          >
+        </div>
+      </div>
+
+      <!-- Premium Templates -->
+      <div class="template-card premium">
+        <div class="template-id">premium-hero-grid</div>
+        <div class="template-type premium">Premium</div>
+        <div class="search-terms">
+          Search: "premium website design", "luxury brand website"
+        </div>
+        <div class="links">
+          <a
+            href="https://unsplash.com/s/photos/premium-website"
+            target="_blank"
+            class="link"
+            >Unsplash</a
+          >
+          <a
+            href="https://dribbble.com/tags/premium"
+            target="_blank"
+            class="link"
+            >Dribbble</a
+          >
+        </div>
+      </div>
+
+      <div class="template-card premium">
+        <div class="template-id">premium-dashboard</div>
+        <div class="template-type premium">Premium</div>
+        <div class="search-terms">
+          Search: "premium dashboard", "analytics interface"
+        </div>
+        <div class="links">
+          <a
+            href="https://unsplash.com/s/photos/premium-dashboard"
+            target="_blank"
+            class="link"
+            >Unsplash</a
+          >
+          <a
+            href="https://dribbble.com/tags/analytics"
+            target="_blank"
+            class="link"
+            >Dribbble</a
+          >
+        </div>
+      </div>
+
+      <div class="template-card premium">
+        <div class="template-id">premium-ecommerce</div>
+        <div class="template-type premium">Premium</div>
+        <div class="search-terms">
+          Search: "premium e-commerce", "luxury store"
+        </div>
+        <div class="links">
+          <a
+            href="https://unsplash.com/s/photos/premium-ecommerce"
+            target="_blank"
+            class="link"
+            >Unsplash</a
+          >
+          <a
+            href="https://dribbble.com/tags/luxury"
+            target="_blank"
+            class="link"
+            >Dribbble</a
+          >
+        </div>
+      </div>
+
+      <div class="template-card premium">
+        <div class="template-id">premium-portfolio</div>
+        <div class="template-type premium">Premium</div>
+        <div class="search-terms">
+          Search: "premium portfolio", "creative agency"
+        </div>
+        <div class="links">
+          <a
+            href="https://unsplash.com/s/photos/premium-portfolio"
+            target="_blank"
+            class="link"
+            >Unsplash</a
+          >
+          <a
+            href="https://dribbble.com/tags/agency"
+            target="_blank"
+            class="link"
+            >Dribbble</a
+          >
+        </div>
+      </div>
+
+      <div class="template-card premium">
+        <div class="template-id">premium-mobile-app</div>
+        <div class="template-type premium">Premium</div>
+        <div class="search-terms">
+          Search: "premium mobile app", "luxury app interface"
+        </div>
+        <div class="links">
+          <a
+            href="https://unsplash.com/s/photos/premium-mobile"
+            target="_blank"
+            class="link"
+            >Unsplash</a
+          >
+          <a
+            href="https://dribbble.com/tags/mobile-app"
+            target="_blank"
+            class="link"
+            >Dribbble</a
+          >
+        </div>
+      </div>
+
+      <!-- Special Template -->
+      <div class="template-card free">
+        <div class="template-id">dynamic-auto-generated</div>
+        <div class="template-type free">Free</div>
+        <div class="search-terms">
+          Search: "adaptive layout", "dynamic design"
+        </div>
+        <div class="links">
+          <a
+            href="https://unsplash.com/s/photos/adaptive-design"
+            target="_blank"
+            class="link"
+            >Unsplash</a
+          >
+          <a
+            href="https://dribbble.com/tags/adaptive"
+            target="_blank"
+            class="link"
+            >Dribbble</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div
+      style="
+        margin-top: 40px;
+        text-align: center;
+        padding: 20px;
+        background: white;
+        border-radius: 12px;
+      "
+    >
+      <h3>🔗 Quick Image Sources:</h3>
+      <div
+        style="
+          display: flex;
+          gap: 20px;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin-top: 20px;
+        "
+      >
+        <a href="https://unsplash.com" target="_blank" class="link">Unsplash</a>
+        <a href="https://dribbble.com" target="_blank" class="link">Dribbble</a>
+        <a href="https://pexels.com" target="_blank" class="link">Pexels</a>
+        <a href="https://behance.net" target="_blank" class="link">Behance</a>
+        <a href="https://figma.com/community" target="_blank" class="link"
+          >Figma Community</a
+        >
+      </div>
+    </div>
+
+    <script>
+      // Add click tracking for analytics
+      document.querySelectorAll(".link").forEach((link) => {
+        link.addEventListener("click", () => {
+          console.log("Clicked:", link.href);
+        });
+      });
+    </script>
+  </body>
+</html>

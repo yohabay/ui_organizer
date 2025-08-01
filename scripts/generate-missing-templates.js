@@ -1,0 +1,815 @@
+const fs = require("fs");
+const path = require("path");
+
+// Modern layout patterns for unique templates
+const modernLayouts = [
+  // Asymmetric layouts
+  {
+    name: "asymmetric-hero",
+    slots: [
+      { x: 0, y: 0, w: 6, h: 4, rotation: 0 },
+      { x: 5, y: 1, w: 4, h: 3, rotation: 5, zIndex: 2 },
+      { x: 1, y: 4, w: 3, h: 3, rotation: -3 },
+      { x: 6, y: 5, w: 3, h: 2, rotation: 2 },
+    ],
+  },
+  {
+    name: "diagonal-cascade",
+    slots: [
+      { x: 0, y: 0, w: 3, h: 3, rotation: -5 },
+      { x: 2, y: 2, w: 4, h: 3, rotation: 3, zIndex: 2 },
+      { x: 4, y: 4, w: 3, h: 4, rotation: -2 },
+      { x: 6, y: 1, w: 3, h: 2, rotation: 8 },
+    ],
+  },
+  {
+    name: "floating-cards",
+    slots: [
+      { x: 2, y: 2, w: 4, h: 3, rotation: 0, zIndex: 1 },
+      { x: 1, y: 1, w: 3, h: 2, rotation: -8, zIndex: 3 },
+      { x: 6, y: 3, w: 3, h: 2, rotation: 5, zIndex: 2 },
+      { x: 0, y: 4, w: 2, h: 3, rotation: 12, zIndex: 1 },
+    ],
+  },
+  {
+    name: "circular-spotlight",
+    slots: [
+      { x: 4, y: 3, w: 4, h: 4, borderRadius: "full", zIndex: 3 },
+      { x: 1, y: 1, w: 2, h: 2, rotation: -15 },
+      { x: 7, y: 1, w: 2, h: 2, rotation: 15 },
+      { x: 9, y: 4, w: 2, h: 2, rotation: 30 },
+      { x: 7, y: 7, w: 2, h: 2, rotation: 45 },
+      { x: 1, y: 7, w: 2, h: 2, rotation: -30 },
+    ],
+  },
+  {
+    name: "staggered-masonry",
+    slots: [
+      { x: 0, y: 0, w: 2, h: 4, rotation: -1 },
+      { x: 2, y: 0, w: 2, h: 3, rotation: 2 },
+      { x: 4, y: 0, w: 2, h: 5, rotation: 0 },
+      { x: 0, y: 4, w: 2, h: 3, rotation: 1 },
+      { x: 2, y: 3, w: 2, h: 4, rotation: -2 },
+      { x: 4, y: 5, w: 2, h: 2, rotation: 3 },
+    ],
+  },
+  {
+    name: "layered-depth",
+    slots: [
+      { x: 1, y: 1, w: 6, h: 4, zIndex: 1, shadow: "lg" },
+      { x: 0, y: 0, w: 3, h: 2, rotation: -5, zIndex: 3 },
+      { x: 6, y: 0, w: 3, h: 2, rotation: 5, zIndex: 3 },
+      { x: 2, y: 5, w: 4, h: 3, zIndex: 2, shadow: "md" },
+    ],
+  },
+  {
+    name: "geometric-hexagon",
+    slots: [
+      { x: 4, y: 2, w: 4, h: 3, shape: "hexagon", zIndex: 2 },
+      { x: 2, y: 0, w: 3, h: 2, shape: "hexagon", rotation: 30 },
+      { x: 7, y: 0, w: 3, h: 2, shape: "hexagon", rotation: -30 },
+      { x: 0, y: 4, w: 3, h: 3, shape: "hexagon", rotation: 0 },
+      { x: 9, y: 4, w: 3, h: 3, shape: "hexagon", rotation: 0 },
+    ],
+  },
+  {
+    name: "spiral-flow",
+    slots: [
+      { x: 5, y: 4, w: 2, h: 2, zIndex: 5 },
+      { x: 4, y: 2, w: 2, h: 2, rotation: -20, zIndex: 4 },
+      { x: 2, y: 3, w: 2, h: 2, rotation: -40, zIndex: 3 },
+      { x: 1, y: 6, w: 2, h: 2, rotation: -60, zIndex: 2 },
+      { x: 3, y: 8, w: 2, h: 2, rotation: -80, zIndex: 1 },
+      { x: 7, y: 7, w: 2, h: 2, rotation: -100 },
+      { x: 9, y: 5, w: 2, h: 2, rotation: -120 },
+    ],
+  },
+  {
+    name: "infinity-loop",
+    slots: [
+      { x: 2, y: 2, w: 2, h: 2, rotation: -30 },
+      { x: 4, y: 1, w: 2, h: 2, rotation: -15 },
+      { x: 6, y: 2, w: 2, h: 2, rotation: 0 },
+      { x: 8, y: 1, w: 2, h: 2, rotation: 15 },
+      { x: 6, y: 4, w: 2, h: 2, rotation: 0, zIndex: 2 },
+      { x: 4, y: 5, w: 2, h: 2, rotation: -45 },
+      { x: 2, y: 6, w: 2, h: 2, rotation: -30 },
+      { x: 8, y: 5, w: 2, h: 2, rotation: 15 },
+    ],
+  },
+  {
+    name: "liquid-organic",
+    slots: [
+      {
+        x: 1,
+        y: 1,
+        w: 4,
+        h: 3,
+        borderRadius: "3xl",
+        rotation: -3,
+        liquidShape: true,
+      },
+      {
+        x: 4,
+        y: 3,
+        w: 5,
+        h: 4,
+        borderRadius: "3xl",
+        rotation: 2,
+        zIndex: 2,
+        liquidShape: true,
+      },
+      {
+        x: 7,
+        y: 1,
+        w: 3,
+        h: 3,
+        borderRadius: "full",
+        rotation: 5,
+        liquidShape: true,
+      },
+      {
+        x: 0,
+        y: 5,
+        w: 3,
+        h: 4,
+        borderRadius: "3xl",
+        rotation: -5,
+        liquidShape: true,
+      },
+    ],
+  },
+  {
+    name: "neon-grid",
+    slots: [
+      { x: 1, y: 1, w: 3, h: 2, neonGlow: "blue", borderRadius: "md" },
+      { x: 5, y: 0, w: 4, h: 3, neonGlow: "purple", borderRadius: "lg" },
+      { x: 0, y: 4, w: 2, h: 3, neonGlow: "pink", borderRadius: "md" },
+      {
+        x: 3,
+        y: 3,
+        w: 3,
+        h: 4,
+        neonGlow: "cyan",
+        borderRadius: "lg",
+        zIndex: 2,
+      },
+      { x: 7, y: 4, w: 3, h: 2, neonGlow: "green", borderRadius: "md" },
+    ],
+  },
+  {
+    name: "brutalist-blocks",
+    slots: [
+      {
+        x: 0,
+        y: 0,
+        w: 4,
+        h: 4,
+        borderRadius: "none",
+        shadow: "harsh",
+        backgroundColor: "black",
+      },
+      {
+        x: 4,
+        y: 0,
+        w: 3,
+        h: 2,
+        borderRadius: "none",
+        shadow: "harsh",
+        backgroundColor: "red",
+      },
+      {
+        x: 7,
+        y: 0,
+        w: 3,
+        h: 3,
+        borderRadius: "none",
+        shadow: "harsh",
+        backgroundColor: "white",
+      },
+      {
+        x: 4,
+        y: 2,
+        w: 3,
+        h: 2,
+        borderRadius: "none",
+        shadow: "harsh",
+        backgroundColor: "yellow",
+      },
+      {
+        x: 0,
+        y: 4,
+        w: 2,
+        h: 3,
+        borderRadius: "none",
+        shadow: "harsh",
+        backgroundColor: "blue",
+      },
+      {
+        x: 2,
+        y: 4,
+        w: 5,
+        h: 3,
+        borderRadius: "none",
+        shadow: "harsh",
+        backgroundColor: "white",
+      },
+    ],
+  },
+  {
+    name: "swiss-minimal",
+    slots: [
+      { x: 0, y: 0, w: 6, h: 4, borderRadius: "none" },
+      { x: 6, y: 0, w: 6, h: 2, textBlock: true, typography: "swiss" },
+      { x: 6, y: 2, w: 3, h: 2, borderRadius: "none" },
+      { x: 9, y: 2, w: 3, h: 2, borderRadius: "none" },
+      { x: 0, y: 4, w: 4, h: 3, borderRadius: "none" },
+      { x: 4, y: 4, w: 4, h: 3, borderRadius: "none" },
+      { x: 8, y: 4, w: 4, h: 3, borderRadius: "none" },
+    ],
+  },
+  {
+    name: "polaroid-scatter",
+    slots: [
+      {
+        x: 1,
+        y: 1,
+        w: 3,
+        h: 4,
+        rotation: -8,
+        polaroidFrame: true,
+        tape: "top-left",
+      },
+      {
+        x: 5,
+        y: 0,
+        w: 3,
+        h: 4,
+        rotation: 12,
+        polaroidFrame: true,
+        tape: "top-right",
+      },
+      {
+        x: 8,
+        y: 3,
+        w: 3,
+        h: 4,
+        rotation: -5,
+        polaroidFrame: true,
+        tape: "bottom",
+      },
+      {
+        x: 0,
+        y: 6,
+        w: 3,
+        h: 4,
+        rotation: 15,
+        polaroidFrame: true,
+        tape: "corner",
+      },
+      {
+        x: 4,
+        y: 7,
+        w: 3,
+        h: 4,
+        rotation: -10,
+        polaroidFrame: true,
+        tape: "side",
+      },
+    ],
+  },
+  {
+    name: "magazine-spread",
+    slots: [
+      { x: 0, y: 0, w: 5, h: 6, zIndex: 1 },
+      { x: 5, y: 1, w: 3, h: 2, rotation: 1 },
+      { x: 8, y: 0, w: 4, h: 3, rotation: -1 },
+      { x: 6, y: 4, w: 6, h: 2, textBlock: true },
+      { x: 0, y: 6, w: 4, h: 3, rotation: 2 },
+      { x: 4, y: 7, w: 3, h: 3, rotation: -1 },
+      { x: 8, y: 6, w: 4, h: 4, rotation: 1 },
+    ],
+  },
+  {
+    name: "comic-panels",
+    slots: [
+      { x: 0, y: 0, w: 5, h: 4, comicPanel: true, speechBubble: "top-right" },
+      { x: 5, y: 0, w: 3, h: 3, comicPanel: true, speechBubble: "bottom-left" },
+      { x: 8, y: 0, w: 4, h: 2, comicPanel: true, thoughtBubble: true },
+      { x: 8, y: 2, w: 4, h: 3, comicPanel: true, actionLines: true },
+      { x: 0, y: 4, w: 3, h: 4, comicPanel: true, speechBubble: "center" },
+      { x: 3, y: 4, w: 4, h: 3, comicPanel: true, explosionEffect: true },
+    ],
+  },
+  {
+    name: "blueprint-technical",
+    slots: [
+      {
+        x: 1,
+        y: 1,
+        w: 6,
+        h: 4,
+        blueprintStyle: true,
+        measurements: true,
+        gridLines: true,
+      },
+      { x: 7, y: 0, w: 4, h: 3, blueprintStyle: true, technicalDrawing: true },
+      { x: 0, y: 5, w: 3, h: 3, blueprintStyle: true, crossSection: true },
+      { x: 3, y: 6, w: 4, h: 2, blueprintStyle: true, dimensions: true },
+      { x: 7, y: 4, w: 5, h: 4, blueprintStyle: true, floorPlan: true },
+    ],
+  },
+  {
+    name: "watercolor-splash",
+    slots: [
+      {
+        x: 1,
+        y: 1,
+        w: 3,
+        h: 3,
+        watercolorEffect: "blue",
+        opacity: 0.8,
+        rotation: -5,
+      },
+      {
+        x: 4,
+        y: 0,
+        w: 4,
+        h: 2,
+        watercolorEffect: "purple",
+        opacity: 0.9,
+        rotation: 3,
+      },
+      {
+        x: 6,
+        y: 3,
+        w: 3,
+        h: 4,
+        watercolorEffect: "pink",
+        opacity: 0.7,
+        rotation: -2,
+      },
+      {
+        x: 0,
+        y: 5,
+        w: 2,
+        h: 3,
+        watercolorEffect: "green",
+        opacity: 0.8,
+        rotation: 8,
+      },
+      {
+        x: 3,
+        y: 6,
+        w: 4,
+        h: 3,
+        watercolorEffect: "orange",
+        opacity: 0.9,
+        rotation: -4,
+      },
+    ],
+  },
+  {
+    name: "isometric-cube",
+    slots: [
+      { x: 4, y: 2, w: 4, h: 3, isometric: "top", perspective: "30deg" },
+      { x: 2, y: 4, w: 4, h: 4, isometric: "left", perspective: "30deg" },
+      { x: 6, y: 4, w: 4, h: 4, isometric: "right", perspective: "30deg" },
+      { x: 1, y: 7, w: 3, h: 2, isometric: "top", perspective: "15deg" },
+      { x: 8, y: 7, w: 3, h: 2, isometric: "top", perspective: "15deg" },
+    ],
+  },
+  {
+    name: "vinyl-records",
+    slots: [
+      {
+        x: 1,
+        y: 1,
+        w: 3,
+        h: 3,
+        shape: "circle",
+        vinylRecord: true,
+        rotation: 45,
+      },
+      {
+        x: 5,
+        y: 0,
+        w: 3,
+        h: 3,
+        shape: "circle",
+        vinylRecord: true,
+        rotation: -30,
+      },
+      {
+        x: 6,
+        y: 4,
+        w: 3,
+        h: 3,
+        shape: "circle",
+        vinylRecord: true,
+        rotation: 60,
+      },
+      {
+        x: 0,
+        y: 5,
+        w: 3,
+        h: 3,
+        shape: "circle",
+        vinylRecord: true,
+        rotation: -45,
+      },
+      {
+        x: 3,
+        y: 7,
+        w: 3,
+        h: 3,
+        shape: "circle",
+        vinylRecord: true,
+        rotation: 15,
+      },
+    ],
+  },
+  {
+    name: "holographic-display",
+    slots: [
+      {
+        x: 2,
+        y: 2,
+        w: 8,
+        h: 5,
+        holographicEffect: true,
+        opacity: 0.9,
+        borderGlow: "cyan",
+      },
+      {
+        x: 0,
+        y: 0,
+        w: 3,
+        h: 2,
+        holographicEffect: true,
+        opacity: 0.7,
+        borderGlow: "blue",
+      },
+      {
+        x: 9,
+        y: 0,
+        w: 3,
+        h: 2,
+        holographicEffect: true,
+        opacity: 0.7,
+        borderGlow: "purple",
+      },
+      {
+        x: 0,
+        y: 8,
+        w: 2,
+        h: 3,
+        holographicEffect: true,
+        opacity: 0.6,
+        borderGlow: "green",
+      },
+      {
+        x: 10,
+        y: 8,
+        w: 2,
+        h: 3,
+        holographicEffect: true,
+        opacity: 0.6,
+        borderGlow: "pink",
+      },
+    ],
+  },
+  {
+    name: "origami-fold",
+    slots: [
+      {
+        x: 0,
+        y: 0,
+        w: 4,
+        h: 4,
+        foldEffect: "valley",
+        rotation: 0,
+        shadow: "fold",
+      },
+      {
+        x: 4,
+        y: 0,
+        w: 3,
+        h: 3,
+        foldEffect: "mountain",
+        rotation: 45,
+        shadow: "fold",
+      },
+      {
+        x: 7,
+        y: 1,
+        w: 3,
+        h: 4,
+        foldEffect: "valley",
+        rotation: -30,
+        shadow: "fold",
+      },
+      {
+        x: 1,
+        y: 4,
+        w: 3,
+        h: 3,
+        foldEffect: "mountain",
+        rotation: 15,
+        shadow: "fold",
+      },
+      {
+        x: 4,
+        y: 5,
+        w: 4,
+        h: 3,
+        foldEffect: "valley",
+        rotation: -10,
+        shadow: "fold",
+      },
+    ],
+  },
+  {
+    name: "constellation-map",
+    slots: [
+      { x: 2, y: 1, w: 2, h: 2, shape: "star", connectionLines: [1, 2] },
+      { x: 5, y: 0, w: 2, h: 2, shape: "star", connectionLines: [0, 2, 3] },
+      { x: 8, y: 2, w: 2, h: 2, shape: "star", connectionLines: [1, 4] },
+      { x: 1, y: 4, w: 2, h: 2, shape: "star", connectionLines: [1, 4, 5] },
+      { x: 6, y: 5, w: 2, h: 2, shape: "star", connectionLines: [2, 3, 6] },
+      { x: 0, y: 7, w: 2, h: 2, shape: "star", connectionLines: [3, 6] },
+    ],
+  },
+  {
+    name: "kaleidoscope-pattern",
+    slots: [
+      { x: 5, y: 5, w: 2, h: 2, zIndex: 5 },
+      { x: 3, y: 3, w: 2, h: 2, rotation: 45, mirror: "horizontal" },
+      { x: 7, y: 3, w: 2, h: 2, rotation: -45, mirror: "vertical" },
+      { x: 3, y: 7, w: 2, h: 2, rotation: -45, mirror: "vertical" },
+      { x: 7, y: 7, w: 2, h: 2, rotation: 45, mirror: "horizontal" },
+      { x: 1, y: 1, w: 2, h: 2, rotation: 90, mirror: "both" },
+      { x: 9, y: 1, w: 2, h: 2, rotation: -90, mirror: "both" },
+    ],
+  },
+  {
+    name: "vintage-collage",
+    slots: [
+      {
+        x: 1,
+        y: 1,
+        w: 4,
+        h: 3,
+        rotation: -5,
+        tornEdges: true,
+        vintageFilter: "sepia",
+      },
+      {
+        x: 4,
+        y: 0,
+        w: 3,
+        h: 4,
+        rotation: 8,
+        tornEdges: true,
+        vintageFilter: "warm",
+      },
+      {
+        x: 7,
+        y: 2,
+        w: 4,
+        h: 3,
+        rotation: -3,
+        tornEdges: true,
+        vintageFilter: "cool",
+      },
+      {
+        x: 0,
+        y: 5,
+        w: 3,
+        h: 4,
+        rotation: 12,
+        tornEdges: true,
+        vintageFilter: "faded",
+      },
+      {
+        x: 3,
+        y: 6,
+        w: 4,
+        h: 3,
+        rotation: -7,
+        tornEdges: true,
+        vintageFilter: "sepia",
+      },
+    ],
+  },
+  {
+    name: "parallax-layers",
+    slots: [
+      { x: 0, y: 0, w: 12, h: 4, parallaxSpeed: 0.5, zIndex: 1, opacity: 0.8 },
+      { x: 2, y: 2, w: 8, h: 4, parallaxSpeed: 1, zIndex: 2, shadow: "lg" },
+      { x: 4, y: 4, w: 4, h: 3, parallaxSpeed: 1.5, zIndex: 3, shadow: "xl" },
+      { x: 1, y: 7, w: 3, h: 2, parallaxSpeed: 0.8, zIndex: 2 },
+      { x: 8, y: 8, w: 3, h: 2, parallaxSpeed: 1.2, zIndex: 2 },
+    ],
+  },
+  {
+    name: "morphing-shapes",
+    slots: [
+      {
+        x: 1,
+        y: 1,
+        w: 3,
+        h: 3,
+        morphShape: "circle-to-square",
+        animationDelay: 0,
+      },
+      {
+        x: 5,
+        y: 0,
+        w: 4,
+        h: 2,
+        morphShape: "rectangle-to-diamond",
+        animationDelay: 0.5,
+      },
+      {
+        x: 6,
+        y: 3,
+        w: 3,
+        h: 4,
+        morphShape: "square-to-hexagon",
+        animationDelay: 1,
+      },
+      {
+        x: 0,
+        y: 5,
+        w: 2,
+        h: 3,
+        morphShape: "triangle-to-circle",
+        animationDelay: 1.5,
+      },
+      {
+        x: 3,
+        y: 6,
+        w: 4,
+        h: 3,
+        morphShape: "hexagon-to-star",
+        animationDelay: 2,
+      },
+    ],
+  },
+];
+
+// Categories with unique names
+const categories = [
+  "E-commerce & Shopping",
+  "Social Media & Community",
+  "Fitness & Health",
+  "Education & Learning",
+  "Food & Restaurant",
+  "Travel & Tourism",
+  "Technology & Software",
+  "Finance & Banking",
+  "Real Estate & Property",
+  "Healthcare & Medical",
+  "Entertainment & Media",
+  "Automotive & Transportation",
+  "Fashion & Beauty",
+  "Gaming & Esports",
+  "Sports & Fitness",
+  "Business & Professional Services",
+  "Non-Profit & Charity",
+  "Government & Public Sector",
+  "Art & Creative",
+  "Music & Audio",
+  "Photography & Visual",
+  "Writing & Publishing",
+  "Science & Research",
+  "Environment & Sustainability",
+  "Agriculture & Farming",
+  "Manufacturing & Industry",
+  "Construction & Architecture",
+  "Legal & Law",
+  "Marketing & Advertising",
+  "Human Resources",
+  "Customer Support",
+  "Inventory Management",
+  "Project Management",
+  "Event Planning",
+  "Wedding & Celebration",
+  "Pet Care & Veterinary",
+  "Childcare & Education",
+  "Senior Care & Healthcare",
+  "Mental Health & Wellness",
+  "Nutrition & Diet",
+  "Fashion Design",
+  "Interior Design",
+  "Graphic Design",
+  "Web Development",
+  "Mobile Development",
+  "Data Analytics",
+  "Artificial Intelligence",
+  "Blockchain & Crypto",
+  "Cybersecurity",
+  "Cloud Computing",
+  "Internet of Things",
+];
+
+// Generate unique templates
+function generateTemplates() {
+  const templates = [];
+  let templateId = 1;
+
+  categories.forEach((category, categoryIndex) => {
+    // Generate 5-8 templates per category
+    const templatesPerCategory = Math.floor(Math.random() * 4) + 5;
+
+    for (let i = 0; i < templatesPerCategory; i++) {
+      const isPremium = Math.random() > 0.6; // 40% premium
+      const layoutPattern =
+        modernLayouts[Math.floor(Math.random() * modernLayouts.length)];
+      const tier = isPremium ? "premium" : "free";
+      const prefix = isPremium ? "premium" : "free";
+
+      const template = {
+        id: `${prefix}-${category
+          .toLowerCase()
+          .replace(/[^a-z0-9]/g, "-")}-${templateId}`,
+        name: `${category.split(" ")[0]} ${layoutPattern.name
+          .split("-")
+          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+          .join(" ")} ${i + 1}`,
+        description: `Modern ${category.toLowerCase()} platform with ${layoutPattern.name.replace(
+          "-",
+          " "
+        )} layout`,
+        category: category,
+        projectTypes: ["website", "mobile"],
+        rows: 10,
+        cols: 10,
+        slots: layoutPattern.slots.map((slot) => ({ ...slot })),
+        preview: `/template-previews/${prefix}-${category
+          .toLowerCase()
+          .replace(/[^a-z0-9]/g, "-")}-${templateId}.jpg`,
+        tags: [
+          category.split(" ")[0].toLowerCase(),
+          layoutPattern.name.replace("-", "-"),
+          "modern",
+          "unique",
+        ],
+        tier: tier,
+      };
+
+      templates.push(template);
+      templateId++;
+    }
+  });
+
+  return templates;
+}
+
+// Generate the templates
+const allTemplates = generateTemplates();
+
+// Create the output file
+const output = `import type { Template } from "@/types";
+
+export const allMissingTemplates: Template[] = ${JSON.stringify(
+  allTemplates,
+  null,
+  2
+)};
+
+// Export individual category arrays
+${categories
+  .map((category) => {
+    const categoryTemplates = allTemplates.filter(
+      (t) => t.category === category
+    );
+    const categoryName = category.toLowerCase().replace(/[^a-z0-9]/g, "-");
+    return `export const ${categoryName}MissingTemplates: Template[] = ${JSON.stringify(
+      categoryTemplates,
+      null,
+      2
+    )};`;
+  })
+  .join("\n\n")}
+`;
+
+// Write to file
+fs.writeFileSync(
+  path.join(__dirname, "../data/all-missing-templates.ts"),
+  output
+);
+
+console.log(
+  `Generated ${allTemplates.length} unique templates across ${categories.length} categories`
+);
+console.log(
+  `Premium templates: ${
+    allTemplates.filter((t) => t.tier === "premium").length
+  }`
+);
+console.log(
+  `Free templates: ${allTemplates.filter((t) => t.tier === "free").length}`
+);
+console.log(`Total templates: ${allTemplates.length}`);
