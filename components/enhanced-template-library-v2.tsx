@@ -261,13 +261,15 @@ export default function EnhancedTemplateLibraryV2({
 
       {/* Templates Grid */}
       <div className="space-y-6">
-        <Tabs defaultValue="all" className="w-full">
-          <TabsList className="grid w-full grid-cols-7">
+        <Tabs
+          defaultValue="all"
+          className="w-full"
+          onValueChange={() => setVisibleCount(10)}
+        >
+          <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="all">All</TabsTrigger>
             <TabsTrigger value="free">Free</TabsTrigger>
             <TabsTrigger value="premium">Premium</TabsTrigger>
-            <TabsTrigger value="ecommerce">E-commerce</TabsTrigger>
-            <TabsTrigger value="social">Social</TabsTrigger>
             <TabsTrigger value="device-specific">Device Specific</TabsTrigger>
           </TabsList>
 
@@ -346,8 +348,9 @@ export default function EnhancedTemplateLibraryV2({
                   : "space-y-4"
               }
             >
-              {visibleTemplates
+              {filteredTemplates
                 .filter((template) => template.tier === "free")
+                .slice(0, visibleCount)
                 .map((template) => (
                   <Card
                     key={template.id}
@@ -385,6 +388,18 @@ export default function EnhancedTemplateLibraryV2({
                   </Card>
                 ))}
             </div>
+            {filteredTemplates.filter((template) => template.tier === "free")
+              .length > visibleCount && (
+              <div className="flex justify-center mt-6">
+                <Button
+                  onClick={handleLoadMore}
+                  variant="outline"
+                  className="px-8"
+                >
+                  Load More
+                </Button>
+              </div>
+            )}
           </TabsContent>
 
           <TabsContent value="premium" className="space-y-6">
@@ -395,8 +410,9 @@ export default function EnhancedTemplateLibraryV2({
                   : "space-y-4"
               }
             >
-              {visibleTemplates
+              {filteredTemplates
                 .filter((template) => template.tier === "premium")
+                .slice(0, visibleCount)
                 .map((template) => (
                   <Card
                     key={template.id}
@@ -434,6 +450,19 @@ export default function EnhancedTemplateLibraryV2({
                   </Card>
                 ))}
             </div>
+            {filteredTemplates.filter(
+              (template) => template.tier === "premium"
+            ).length > visibleCount && (
+              <div className="flex justify-center mt-6">
+                <Button
+                  onClick={handleLoadMore}
+                  variant="outline"
+                  className="px-8"
+                >
+                  Load More
+                </Button>
+              </div>
+            )}
           </TabsContent>
 
           <TabsContent value="ecommerce" className="space-y-6">
@@ -444,12 +473,13 @@ export default function EnhancedTemplateLibraryV2({
                   : "space-y-4"
               }
             >
-              {visibleTemplates
+              {filteredTemplates
                 .filter(
                   (template) =>
                     template.tags.includes("ecommerce") ||
                     template.category.includes("E-commerce")
                 )
+                .slice(0, visibleCount)
                 .map((template) => (
                   <Card
                     key={template.id}
@@ -494,6 +524,21 @@ export default function EnhancedTemplateLibraryV2({
                   </Card>
                 ))}
             </div>
+            {filteredTemplates.filter(
+              (template) =>
+                template.tags.includes("ecommerce") ||
+                template.category.includes("E-commerce")
+            ).length > visibleCount && (
+              <div className="flex justify-center mt-6">
+                <Button
+                  onClick={handleLoadMore}
+                  variant="outline"
+                  className="px-8"
+                >
+                  Load More
+                </Button>
+              </div>
+            )}
           </TabsContent>
 
           <TabsContent value="social" className="space-y-6">
@@ -504,12 +549,13 @@ export default function EnhancedTemplateLibraryV2({
                   : "space-y-4"
               }
             >
-              {visibleTemplates
+              {filteredTemplates
                 .filter(
                   (template) =>
                     template.tags.includes("social") ||
                     template.category.includes("Social")
                 )
+                .slice(0, visibleCount)
                 .map((template) => (
                   <Card
                     key={template.id}
@@ -554,6 +600,21 @@ export default function EnhancedTemplateLibraryV2({
                   </Card>
                 ))}
             </div>
+            {filteredTemplates.filter(
+              (template) =>
+                template.tags.includes("social") ||
+                template.category.includes("Social")
+            ).length > visibleCount && (
+              <div className="flex justify-center mt-6">
+                <Button
+                  onClick={handleLoadMore}
+                  variant="outline"
+                  className="px-8"
+                >
+                  Load More
+                </Button>
+              </div>
+            )}
           </TabsContent>
 
           <TabsContent value="device-specific" className="space-y-6">
