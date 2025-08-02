@@ -26,19 +26,17 @@ import type {
   TemplateSlot,
 } from "@/types";
 import { Download, Zap } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { DownloadTroubleshooter } from "./download-troubleshooter";
 
 interface ProfessionalExportEngineProps {
   template: Template | null;
-  arrangement: ArrangementSlot[];
   projectType: ProjectType;
   screenshots: any[];
 }
 
 export function ProfessionalExportEngine({
   template,
-  arrangement,
   projectType,
   screenshots,
 }: ProfessionalExportEngineProps) {
@@ -58,6 +56,17 @@ export function ProfessionalExportEngine({
   const [useAdvancedEffects, setUseAdvancedEffects] = useState(true);
   const [useGradients, setUseGradients] = useState(true);
   const { toast } = useToast();
+
+  const arrangement = useMemo(() => {
+    if (!template || !template.slots || !screenshots) {
+      return [];
+    } 
+
+    return template.slots.map((slot, index) => ({
+      ...slot,
+      screenshot: screenshots[index] || null,
+    }));
+  }, [template, screenshots]);
 
   const filledSlots = arrangement.filter((slot) => slot.screenshot).length;
   const canExport = template && filledSlots > 0;
@@ -161,8 +170,7 @@ export function ProfessionalExportEngine({
     );
 
     // Use template from component props
-    const templateToUse =
-      template || (arrangementData[0]?.template as Template);
+    const templateToUse = optimalTemplate;
     if (!templateToUse) {
       throw new Error("No template available for export");
     }
@@ -365,13 +373,18 @@ export function ProfessionalExportEngine({
         ctx.shadowOffsetX = 1;
         ctx.shadowOffsetY = 1;
 
-        ctx.fillText(`Slot ${i + 1}`, x + width / 2, y + height / 2);
+        ctx.fillText(`Slot ${i + 1} (Failed to Load)`, x + width / 2, y + height / 2);
 
         // Reset shadow
         ctx.shadowColor = "transparent";
         ctx.shadowBlur = 0;
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = 0;
+
+        // Add a red border for failed images
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 4;
+        ctx.strokeRect(x, y, width, height);
       }
     }
 
@@ -1348,93 +1361,44 @@ export function ProfessionalExportEngine({
 
   // Dynamic template generation based on screenshot count
   const generateDynamicTemplate = (screenshotCount: number): Template => {
-    const baseTemplate: Template = {
-      id: "dynamic-auto-generated",
-      name: "Dynamic Auto-Generated",
-      description: `Automatically generated layout for ${screenshotCount} screenshots`,
-      category: "Dynamic Auto",
-      projectTypes: [projectType],
-      rows: Math.max(6, Math.ceil(screenshotCount / 4) * 2),
-      cols: 8,
-      slots: [],
-      preview: "dynamic-auto",
-      tags: ["dynamic", "auto-generated", "adaptive"],
-    };
+    const cols = 3; // Number of columns in the grid
+    const rows = Math.ceil(screenshotCount / cols); // Calculate rows needed
 
-    // Generate slots based on screenshot count
     const slots: TemplateSlot[] = [];
-    let currentRow = 0;
-    let currentCol = 0;
-
     for (let i = 0; i < screenshotCount; i++) {
-      let slotWidth = 2;
-      let slotHeight = 2;
-
-      // Hero treatment for first screenshot
-      if (i === 0) {
-        slotWidth = 8;
-        slotHeight = 3;
-        currentRow = 0;
-        currentCol = 0;
-      } else if (i === 1) {
-        // Second screenshot gets prominent placement
-        slotWidth = 4;
-        slotHeight = 2;
-        currentRow = 3;
-        currentCol = 0;
-      } else if (i === 2) {
-        // Third screenshot
-        slotWidth = 4;
-        slotHeight = 2;
-        currentRow = 3;
-        currentCol = 4;
-      } else {
-        // Regular grid for remaining screenshots
-        slotWidth = 2;
-        slotHeight = 2;
-
-        // Calculate position
-        const row = Math.floor((i - 3) / 4) + 5;
-        const col = ((i - 3) % 4) * 2;
-
-        currentRow = row;
-        currentCol = col;
-      }
-
+      const row = Math.floor(i / cols);
+      const col = i % cols;
       slots.push({
-        x: currentCol,
-        y: currentRow,
-        w: slotWidth,
-        h: slotHeight,
+        x: col * 4, // Each slot takes 4 grid units horizontally
+        y: row * 3, // Each slot takes 3 grid units vertically
+        w: 4,       // Width of each slot
+        h: 3,       // Height of each slot
+        borderRadius: "lg", // Example: default border radius
+        shadow: "md",       // Example: default shadow
       });
-
-      // Update position for next slot
-      if (i === 0) {
-        currentRow = 3;
-        currentCol = 0;
-      } else if (i === 1) {
-        currentRow = 3;
-        currentCol = 4;
-      } else if (i === 2) {
-        currentRow = 5;
-        currentCol = 0;
-      } else {
-        // For regular grid, position is calculated above
-      }
     }
 
-    baseTemplate.slots = slots;
-    return baseTemplate;
+    return {
+      id: `dynamic-${screenshotCount}`,
+      name: `Dynamic Layout (${screenshotCount} screenshots)`,
+      description: `Automatically generated grid layout for ${screenshotCount} screenshots`,
+      category: "Dynamic Layouts",
+      projectTypes: [projectType],
+      rows: rows * 3, // Total rows based on slot height
+      cols: cols * 4, // Total columns based on slot width
+      slots,
+      preview: `/template-previews/dynamic-${screenshotCount}.jpg`,
+      tags: ["dynamic", "auto-generated", "grid"],
+    };
   };
 
   // Smart template selection based on screenshot count
   const getOptimalTemplate = (screenshotCount: number): Template => {
-    // If we have a selected template, use it if it has enough slots
+    // If a template is explicitly selected and it has enough slots, use it.
+    // Otherwise, generate a dynamic template that can hold all screenshots.
     if (template && template.slots.length >= screenshotCount) {
       return template;
     }
-
-    // Generate dynamic template for any number of screenshots
     return generateDynamicTemplate(screenshotCount);
   };
 
@@ -1520,7 +1484,9 @@ export function ProfessionalExportEngine({
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+            <div className="aspect-video bg-muted rounded-lg flex items-center justify-center"
+              style={{minHeight: "200px"}}
+            >
               <div className="text-center space-y-2">
                 <Download className="h-8 w-8 mx-auto text-muted-foreground" />
                 <p className="text-sm text-muted-foreground">

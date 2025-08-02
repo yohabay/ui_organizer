@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import type { Screenshot, Template } from "@/types";
 import { Globe, Image, Smartphone, Sparkles, Tablet } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface RealProjectPreviewProps {
   template: Template;
@@ -22,6 +23,12 @@ export function RealProjectPreview({
   selectedFrame = "none",
   onFrameChange,
 }: RealProjectPreviewProps) {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   console.log("RealProjectPreview received:", {
     template: template?.name,
     screenshotsCount: screenshots.length,
@@ -327,6 +334,10 @@ export function RealProjectPreview({
       </div>
     );
   };
+
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <div className="space-y-6">

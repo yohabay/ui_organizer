@@ -741,7 +741,6 @@ export default function Home() {
                 <CardContent>
                   <ProfessionalExportEngine
                     template={selectedTemplate || dynamicTemplate || null}
-                    arrangement={arrangement}
                     projectType={projectType}
                     screenshots={screenshots}
                   />
