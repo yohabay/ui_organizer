@@ -63,7 +63,7 @@ export function ProfessionalExportEngine({
     } 
 
     return template.slots.map((slot, index) => ({
-      ...slot,
+      ...(slot as ArrangementSlot),
       screenshot: screenshots[index] || null,
     }));
   }, [template, screenshots]);
@@ -253,7 +253,7 @@ export function ProfessionalExportEngine({
           };
 
           img.crossOrigin = "anonymous";
-          img.src = slot.screenshot.url;
+          img.src = slot.screenshot!.url;
         });
 
         // Calculate proper image fitting

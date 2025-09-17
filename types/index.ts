@@ -97,7 +97,7 @@ export interface Template {
   preview: string;
   tags: string[];
   realProject?: RealProject;
-  isPremium?: boolean;
+  tier: "free" | "premium";
 }
 
 export interface ArrangementSlot extends TemplateSlot {

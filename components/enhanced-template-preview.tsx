@@ -110,7 +110,7 @@ export function EnhancedTemplatePreview({
       for (let i = 0; i < entries.length; i++) {
         const [index, imageUrl] = entries[i];
         await new Promise((resolve) => setTimeout(resolve, i * 50)); // 50ms delay between each image
-        loadImage(parseInt(index), imageUrl);
+        loadImage(parseInt(index as any), imageUrl as string);
       }
     };
 

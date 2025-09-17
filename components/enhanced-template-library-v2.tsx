@@ -38,7 +38,7 @@ import { technologyTemplates } from "@/data/technology-templates";
 import { travelTemplates } from "@/data/travel-templates";
 import { Template } from "@/types";
 import { Grid, List, Search } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { EnhancedTemplatePreview } from "./enhanced-template-preview";
 
 interface EnhancedTemplateLibraryV2Props {
@@ -55,6 +55,11 @@ export default function EnhancedTemplateLibraryV2({
   const [selectedPlatform, setSelectedPlatform] = useState("all");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [visibleCount, setVisibleCount] = useState(10); // Show only 10 templates initially
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const allTemplates = useMemo(() => {
     return [
@@ -254,233 +259,37 @@ export default function EnhancedTemplateLibraryV2({
       </div>
 
       {/* Template Count Display */}
-      <div className="text-sm text-muted-foreground">
-        Showing {visibleTemplates.length} of {filteredTemplates.length}{" "}
-        templates
-      </div>
+      {isMounted && (
+        <div className="text-sm text-muted-foreground">
+          Showing {visibleTemplates.length} of {filteredTemplates.length}{" "}
+          templates
+        </div>
+      )}
 
       {/* Templates Grid */}
-      <div className="space-y-6">
-        <Tabs
-          defaultValue="all"
-          className="w-full"
-          onValueChange={() => setVisibleCount(10)}
-        >
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="all">All</TabsTrigger>
-            <TabsTrigger value="free">Free</TabsTrigger>
-            <TabsTrigger value="premium">Premium</TabsTrigger>
-            <TabsTrigger value="device-specific">Device Specific</TabsTrigger>
-          </TabsList>
+      {isMounted && (
+        <div className="space-y-6">
+          <Tabs
+            defaultValue="all"
+            className="w-full"
+            onValueChange={() => setVisibleCount(10)}
+          >
+            <TabsList className="grid w-full grid-cols-4">
+              <TabsTrigger value="all">All</TabsTrigger>
+              <TabsTrigger value="free">Free</TabsTrigger>
+              <TabsTrigger value="premium">Premium</TabsTrigger>
+              <TabsTrigger value="device-specific">Device Specific</TabsTrigger>
+            </TabsList>
 
-          <TabsContent value="all" className="space-y-6">
-            <div
-              className={
-                viewMode === "grid"
-                  ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-                  : "space-y-4"
-              }
-            >
-              {visibleTemplates.map((template) => (
-                <Card
-                  key={template.id}
-                  className={`cursor-pointer transition-all hover:shadow-lg ${
-                    selectedTemplate?.id === template.id
-                      ? "ring-2 ring-primary"
-                      : ""
-                  }`}
-                  onClick={() => handleTemplateClick(template)}
-                >
-                  <CardHeader className="pb-1">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <CardTitle className="text-sm">
-                          {template.name}
-                        </CardTitle>
-                      </div>
-                      <Badge
-                        variant={
-                          template.tier === "premium" ? "default" : "secondary"
-                        }
-                        className="text-xs"
-                      >
-                        {template.tier === "premium" ? "Premium" : "Free"}
-                      </Badge>
-                    </div>
-                  </CardHeader>
-
-                  <CardContent className="pt-0">
-                    <div className="mb-1">
-                      <EnhancedTemplatePreview
-                        template={template}
-                        isSelected={selectedTemplate?.id === template.id}
-                        onSelect={() => handleTemplateClick(template)}
-                        showDeviceFrames={true}
-                        containerWidth={500}
-                      />
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            {/* Load More Button */}
-            {visibleTemplates.length < filteredTemplates.length && (
-              <div className="flex justify-center mt-6">
-                <Button
-                  onClick={handleLoadMore}
-                  variant="outline"
-                  className="px-8"
-                >
-                  Load More Templates (
-                  {filteredTemplates.length - visibleTemplates.length}{" "}
-                  remaining)
-                </Button>
-              </div>
-            )}
-          </TabsContent>
-
-          <TabsContent value="free" className="space-y-6">
-            <div
-              className={
-                viewMode === "grid"
-                  ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-                  : "space-y-4"
-              }
-            >
-              {filteredTemplates
-                .filter((template) => template.tier === "free")
-                .slice(0, visibleCount)
-                .map((template) => (
-                  <Card
-                    key={template.id}
-                    className={`cursor-pointer transition-all hover:shadow-lg ${
-                      selectedTemplate?.id === template.id
-                        ? "ring-2 ring-primary"
-                        : ""
-                    }`}
-                    onClick={() => handleTemplateClick(template)}
-                  >
-                    <CardHeader className="pb-1">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <CardTitle className="text-sm">
-                            {template.name}
-                          </CardTitle>
-                        </div>
-                        <Badge variant="secondary" className="text-xs">
-                          Free
-                        </Badge>
-                      </div>
-                    </CardHeader>
-
-                    <CardContent className="pt-0">
-                      <div className="mb-1">
-                        <EnhancedTemplatePreview
-                          template={template}
-                          isSelected={selectedTemplate?.id === template.id}
-                          onSelect={() => handleTemplateClick(template)}
-                          showDeviceFrames={true}
-                          containerWidth={500}
-                        />
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-            </div>
-            {filteredTemplates.filter((template) => template.tier === "free")
-              .length > visibleCount && (
-              <div className="flex justify-center mt-6">
-                <Button
-                  onClick={handleLoadMore}
-                  variant="outline"
-                  className="px-8"
-                >
-                  Load More
-                </Button>
-              </div>
-            )}
-          </TabsContent>
-
-          <TabsContent value="premium" className="space-y-6">
-            <div
-              className={
-                viewMode === "grid"
-                  ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-                  : "space-y-4"
-              }
-            >
-              {filteredTemplates
-                .filter((template) => template.tier === "premium")
-                .slice(0, visibleCount)
-                .map((template) => (
-                  <Card
-                    key={template.id}
-                    className={`cursor-pointer transition-all hover:shadow-lg ${
-                      selectedTemplate?.id === template.id
-                        ? "ring-2 ring-primary"
-                        : ""
-                    }`}
-                    onClick={() => handleTemplateClick(template)}
-                  >
-                    <CardHeader className="pb-1">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <CardTitle className="text-sm">
-                            {template.name}
-                          </CardTitle>
-                        </div>
-                        <Badge variant="default" className="text-xs">
-                          Premium
-                        </Badge>
-                      </div>
-                    </CardHeader>
-
-                    <CardContent className="pt-0">
-                      <div className="mb-1">
-                        <EnhancedTemplatePreview
-                          template={template}
-                          isSelected={selectedTemplate?.id === template.id}
-                          onSelect={() => handleTemplateClick(template)}
-                          showDeviceFrames={true}
-                          containerWidth={500}
-                        />
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-            </div>
-            {filteredTemplates.filter(
-              (template) => template.tier === "premium"
-            ).length > visibleCount && (
-              <div className="flex justify-center mt-6">
-                <Button
-                  onClick={handleLoadMore}
-                  variant="outline"
-                  className="px-8"
-                >
-                  Load More
-                </Button>
-              </div>
-            )}
-          </TabsContent>
-
-          <TabsContent value="ecommerce" className="space-y-6">
-            <div
-              className={
-                viewMode === "grid"
-                  ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-                  : "space-y-4"
-              }
-            >
-              {filteredTemplates
-                .filter(
-                  (template) =>
-                    template.tags.includes("ecommerce") ||
-                    template.category.includes("E-commerce")
-                )
-                .slice(0, visibleCount)
-                .map((template) => (
+            <TabsContent value="all" className="space-y-6">
+              <div
+                className={
+                  viewMode === "grid"
+                    ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                    : "space-y-4"
+                }
+              >
+                {visibleTemplates.map((template) => (
                   <Card
                     key={template.id}
                     className={`cursor-pointer transition-all hover:shadow-lg ${
@@ -499,9 +308,7 @@ export default function EnhancedTemplateLibraryV2({
                         </div>
                         <Badge
                           variant={
-                            template.tier === "premium"
-                              ? "default"
-                              : "secondary"
+                            template.tier === "premium" ? "default" : "secondary"
                           }
                           className="text-xs"
                         >
@@ -523,405 +330,607 @@ export default function EnhancedTemplateLibraryV2({
                     </CardContent>
                   </Card>
                 ))}
-            </div>
-            {filteredTemplates.filter(
-              (template) =>
-                template.tags.includes("ecommerce") ||
-                template.category.includes("E-commerce")
-            ).length > visibleCount && (
-              <div className="flex justify-center mt-6">
-                <Button
-                  onClick={handleLoadMore}
-                  variant="outline"
-                  className="px-8"
-                >
-                  Load More
-                </Button>
               </div>
-            )}
-          </TabsContent>
 
-          <TabsContent value="social" className="space-y-6">
-            <div
-              className={
-                viewMode === "grid"
-                  ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-                  : "space-y-4"
-              }
-            >
-              {filteredTemplates
-                .filter(
-                  (template) =>
-                    template.tags.includes("social") ||
-                    template.category.includes("Social")
-                )
-                .slice(0, visibleCount)
-                .map((template) => (
-                  <Card
-                    key={template.id}
-                    className={`cursor-pointer transition-all hover:shadow-lg ${
-                      selectedTemplate?.id === template.id
-                        ? "ring-2 ring-primary"
-                        : ""
-                    }`}
-                    onClick={() => handleTemplateClick(template)}
+              {/* Load More Button */}
+              {visibleTemplates.length < filteredTemplates.length && (
+                <div className="flex justify-center mt-6">
+                  <Button
+                    onClick={handleLoadMore}
+                    variant="outline"
+                    className="px-8"
                   >
-                    <CardHeader className="pb-1">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <CardTitle className="text-sm">
-                            {template.name}
-                          </CardTitle>
+                    Load More Templates (
+                    {filteredTemplates.length - visibleTemplates.length}{" "}
+                    remaining)
+                  </Button>
+                </div>
+              )}
+            </TabsContent>
+
+            <TabsContent value="free" className="space-y-6">
+              <div
+                className={
+                  viewMode === "grid"
+                    ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                    : "space-y-4"
+                }
+              >
+                {filteredTemplates
+                  .filter((template) => template.tier === "free")
+                  .slice(0, visibleCount)
+                  .map((template) => (
+                    <Card
+                      key={template.id}
+                      className={`cursor-pointer transition-all hover:shadow-lg ${
+                        selectedTemplate?.id === template.id
+                          ? "ring-2 ring-primary"
+                          : ""
+                      }`}
+                      onClick={() => handleTemplateClick(template)}
+                    >
+                      <CardHeader className="pb-1">
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <CardTitle className="text-sm">
+                              {template.name}
+                            </CardTitle>
+                          </div>
+                          <Badge variant="secondary" className="text-xs">
+                            Free
+                          </Badge>
                         </div>
-                        <Badge
-                          variant={
-                            template.tier === "premium"
-                              ? "default"
-                              : "secondary"
-                          }
-                          className="text-xs"
+                      </CardHeader>
+
+                      <CardContent className="pt-0">
+                        <div className="mb-1">
+                          <EnhancedTemplatePreview
+                            template={template}
+                            isSelected={selectedTemplate?.id === template.id}
+                            onSelect={() => handleTemplateClick(template)}
+                            showDeviceFrames={true}
+                            containerWidth={500}
+                          />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+              </div>
+              {filteredTemplates.filter((template) => template.tier === "free")
+                .length > visibleCount && (
+                <div className="flex justify-center mt-6">
+                  <Button
+                    onClick={handleLoadMore}
+                    variant="outline"
+                    className="px-8"
+                  >
+                    Load More
+                  </Button>
+                </div>
+              )}
+            </TabsContent>
+
+            <TabsContent value="premium" className="space-y-6">
+              <div
+                className={
+                  viewMode === "grid"
+                    ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                    : "space-y-4"
+                }
+              >
+                {filteredTemplates
+                  .filter((template) => template.tier === "premium")
+                  .slice(0, visibleCount)
+                  .map((template) => (
+                    <Card
+                      key={template.id}
+                      className={`cursor-pointer transition-all hover:shadow-lg ${
+                        selectedTemplate?.id === template.id
+                          ? "ring-2 ring-primary"
+                          : ""
+                      }`}
+                      onClick={() => handleTemplateClick(template)}
+                    >
+                      <CardHeader className="pb-1">
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <CardTitle className="text-sm">
+                              {template.name}
+                            </CardTitle>
+                          </div>
+                          <Badge variant="default" className="text-xs">
+                            Premium
+                          </Badge>
+                        </div>
+                      </CardHeader>
+
+                      <CardContent className="pt-0">
+                        <div className="mb-1">
+                          <EnhancedTemplatePreview
+                            template={template}
+                            isSelected={selectedTemplate?.id === template.id}
+                            onSelect={() => handleTemplateClick(template)}
+                            showDeviceFrames={true}
+                            containerWidth={500}
+                          />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+              </div>
+              {filteredTemplates.filter(
+                (template) => template.tier === "premium"
+              ).length > visibleCount && (
+                <div className="flex justify-center mt-6">
+                  <Button
+                    onClick={handleLoadMore}
+                    variant="outline"
+                    className="px-8"
+                  >
+                    Load More
+                  </Button>
+                </div>
+              )}
+            </TabsContent>
+
+            <TabsContent value="ecommerce" className="space-y-6">
+              <div
+                className={
+                  viewMode === "grid"
+                    ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                    : "space-y-4"
+                }
+              >
+                {filteredTemplates
+                  .filter(
+                    (template) =>
+                      template.tags.includes("ecommerce") ||
+                      template.category.includes("E-commerce")
+                  )
+                  .slice(0, visibleCount)
+                  .map((template) => (
+                    <Card
+                      key={template.id}
+                      className={`cursor-pointer transition-all hover:shadow-lg ${
+                        selectedTemplate?.id === template.id
+                          ? "ring-2 ring-primary"
+                          : ""
+                      }`}
+                      onClick={() => handleTemplateClick(template)}
+                    >
+                      <CardHeader className="pb-1">
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <CardTitle className="text-sm">
+                              {template.name}
+                            </CardTitle>
+                          </div>
+                          <Badge
+                            variant={
+                              template.tier === "premium"
+                                ? "default"
+                                : "secondary"
+                            }
+                            className="text-xs"
+                          >
+                            {template.tier === "premium" ? "Premium" : "Free"}
+                          </Badge>
+                        </div>
+                      </CardHeader>
+
+                      <CardContent className="pt-0">
+                        <div className="mb-1">
+                          <EnhancedTemplatePreview
+                            template={template}
+                            isSelected={selectedTemplate?.id === template.id}
+                            onSelect={() => handleTemplateClick(template)}
+                            showDeviceFrames={true}
+                            containerWidth={500}
+                          />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+              </div>
+              {filteredTemplates.filter(
+                (template) =>
+                  template.tags.includes("ecommerce") ||
+                  template.category.includes("E-commerce")
+              ).length > visibleCount && (
+                <div className="flex justify-center mt-6">
+                  <Button
+                    onClick={handleLoadMore}
+                    variant="outline"
+                    className="px-8"
+                  >
+                    Load More
+                  </Button>
+                </div>
+              )}
+            </TabsContent>
+
+            <TabsContent value="social" className="space-y-6">
+              <div
+                className={
+                  viewMode === "grid"
+                    ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                    : "space-y-4"
+                }
+              >
+                {filteredTemplates
+                  .filter(
+                    (template) =>
+                      template.tags.includes("social") ||
+                      template.category.includes("Social")
+                  )
+                  .slice(0, visibleCount)
+                  .map((template) => (
+                    <Card
+                      key={template.id}
+                      className={`cursor-pointer transition-all hover:shadow-lg ${
+                        selectedTemplate?.id === template.id
+                          ? "ring-2 ring-primary"
+                          : ""
+                      }`}
+                      onClick={() => handleTemplateClick(template)}
+                    >
+                      <CardHeader className="pb-1">
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <CardTitle className="text-sm">
+                              {template.name}
+                            </CardTitle>
+                          </div>
+                          <Badge
+                            variant={
+                              template.tier === "premium"
+                                ? "default"
+                                : "secondary"
+                            }
+                            className="text-xs"
+                          >
+                            {template.tier === "premium" ? "Premium" : "Free"}
+                          </Badge>
+                        </div>
+                      </CardHeader>
+
+                      <CardContent className="pt-0">
+                        <div className="mb-1">
+                          <EnhancedTemplatePreview
+                            template={template}
+                            isSelected={selectedTemplate?.id === template.id}
+                            onSelect={() => handleTemplateClick(template)}
+                            showDeviceFrames={true}
+                            containerWidth={500}
+                          />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+              </div>
+              {filteredTemplates.filter(
+                (template) =>
+                  template.tags.includes("social") ||
+                  template.category.includes("Social")
+              ).length > visibleCount && (
+                <div className="flex justify-center mt-6">
+                  <Button
+                    onClick={handleLoadMore}
+                    variant="outline"
+                    className="px-8"
+                  >
+                    Load More
+                  </Button>
+                </div>
+              )}
+            </TabsContent>
+
+            <TabsContent value="device-specific" className="space-y-6">
+              <div className="space-y-6">
+                {/* Mobile Development Section */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 text-slate-900">
+                    📱 Mobile Development
+                  </h3>
+                  <div
+                    className={
+                      viewMode === "grid"
+                        ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                        : "space-y-4"
+                    }
+                  >
+                    {mobileTemplates
+                      .slice(0, Math.min(visibleCount, mobileTemplates.length))
+                      .map((template) => (
+                        <Card
+                          key={template.id}
+                          className={`cursor-pointer transition-all hover:shadow-lg ${
+                            selectedTemplate?.id === template.id
+                              ? "ring-2 ring-primary"
+                              : ""
+                          }`}
+                          onClick={() => handleTemplateClick(template)}
                         >
-                          {template.tier === "premium" ? "Premium" : "Free"}
-                        </Badge>
-                      </div>
-                    </CardHeader>
-
-                    <CardContent className="pt-0">
-                      <div className="mb-1">
-                        <EnhancedTemplatePreview
-                          template={template}
-                          isSelected={selectedTemplate?.id === template.id}
-                          onSelect={() => handleTemplateClick(template)}
-                          showDeviceFrames={true}
-                          containerWidth={500}
-                        />
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-            </div>
-            {filteredTemplates.filter(
-              (template) =>
-                template.tags.includes("social") ||
-                template.category.includes("Social")
-            ).length > visibleCount && (
-              <div className="flex justify-center mt-6">
-                <Button
-                  onClick={handleLoadMore}
-                  variant="outline"
-                  className="px-8"
-                >
-                  Load More
-                </Button>
-              </div>
-            )}
-          </TabsContent>
-
-          <TabsContent value="device-specific" className="space-y-6">
-            <div className="space-y-6">
-              {/* Mobile Development Section */}
-              <div>
-                <h3 className="text-lg font-semibold mb-4 text-slate-900">
-                  📱 Mobile Development
-                </h3>
-                <div
-                  className={
-                    viewMode === "grid"
-                      ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-                      : "space-y-4"
-                  }
-                >
-                  {mobileTemplates
-                    .slice(0, Math.min(visibleCount, mobileTemplates.length))
-                    .map((template) => (
-                      <Card
-                        key={template.id}
-                        className={`cursor-pointer transition-all hover:shadow-lg ${
-                          selectedTemplate?.id === template.id
-                            ? "ring-2 ring-primary"
-                            : ""
-                        }`}
-                        onClick={() => handleTemplateClick(template)}
-                      >
-                        <CardHeader className="pb-1">
-                          <div className="flex items-start justify-between">
-                            <div className="flex-1">
-                              <CardTitle className="text-sm">
-                                {template.name}
-                              </CardTitle>
+                          <CardHeader className="pb-1">
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <CardTitle className="text-sm">
+                                  {template.name}
+                                </CardTitle>
+                              </div>
+                              <Badge
+                                variant={
+                                  template.tier === "premium"
+                                    ? "default"
+                                    : "secondary"
+                                }
+                                className="text-xs"
+                              >
+                                {template.tier === "premium" ? "Premium" : "Free"}
+                              </Badge>
                             </div>
-                            <Badge
-                              variant={
-                                template.tier === "premium"
-                                  ? "default"
-                                  : "secondary"
-                              }
-                              className="text-xs"
-                            >
-                              {template.tier === "premium" ? "Premium" : "Free"}
-                            </Badge>
-                          </div>
-                        </CardHeader>
+                          </CardHeader>
 
-                        <CardContent className="pt-0">
-                          <div className="mb-1">
-                            <EnhancedTemplatePreview
-                              template={template}
-                              isSelected={selectedTemplate?.id === template.id}
-                              onSelect={() => handleTemplateClick(template)}
-                              showDeviceFrames={true}
-                              containerWidth={500}
-                            />
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
+                          <CardContent className="pt-0">
+                            <div className="mb-1">
+                              <EnhancedTemplatePreview
+                                template={template}
+                                isSelected={selectedTemplate?.id === template.id}
+                                onSelect={() => handleTemplateClick(template)}
+                                showDeviceFrames={true}
+                                containerWidth={500}
+                              />
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                  </div>
+                </div>
+
+                {/* Desktop Development Section */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 text-slate-900">
+                    🖥️ Desktop Development
+                  </h3>
+                  <div
+                    className={
+                      viewMode === "grid"
+                        ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                        : "space-y-4"
+                    }
+                  >
+                    {desktopTemplates
+                      .slice(0, Math.min(visibleCount, desktopTemplates.length))
+                      .map((template) => (
+                        <Card
+                          key={template.id}
+                          className={`cursor-pointer transition-all hover:shadow-lg ${
+                            selectedTemplate?.id === template.id
+                              ? "ring-2 ring-primary"
+                              : ""
+                          }`}
+                          onClick={() => handleTemplateClick(template)}
+                        >
+                          <CardHeader className="pb-1">
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <CardTitle className="text-sm">
+                                  {template.name}
+                                </CardTitle>
+                              </div>
+                              <Badge
+                                variant={
+                                  template.tier === "premium"
+                                    ? "default"
+                                    : "secondary"
+                                }
+                                className="text-xs"
+                              >
+                                {template.tier === "premium" ? "Premium" : "Free"}
+                              </Badge>
+                            </div>
+                          </CardHeader>
+
+                          <CardContent className="pt-0">
+                            <div className="mb-1">
+                              <EnhancedTemplatePreview
+                                template={template}
+                                isSelected={selectedTemplate?.id === template.id}
+                                onSelect={() => handleTemplateClick(template)}
+                                showDeviceFrames={true}
+                                containerWidth={500}
+                              />
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                  </div>
+                </div>
+
+                {/* Website Development Section */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 text-slate-900">
+                    🌐 Website Development
+                  </h3>
+                  <div
+                    className={
+                      viewMode === "grid"
+                        ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                        : "space-y-4"
+                    }
+                  >
+                    {websiteTemplates
+                      .slice(0, Math.min(visibleCount, websiteTemplates.length))
+                      .map((template) => (
+                        <Card
+                          key={template.id}
+                          className={`cursor-pointer transition-all hover:shadow-lg ${
+                            selectedTemplate?.id === template.id
+                              ? "ring-2 ring-primary"
+                              : ""
+                          }`}
+                          onClick={() => handleTemplateClick(template)}
+                        >
+                          <CardHeader className="pb-1">
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <CardTitle className="text-sm">
+                                  {template.name}
+                                </CardTitle>
+                              </div>
+                              <Badge
+                                variant={
+                                  template.tier === "premium"
+                                    ? "default"
+                                    : "secondary"
+                                }
+                                className="text-xs"
+                              >
+                                {template.tier === "premium" ? "Premium" : "Free"}
+                              </Badge>
+                            </div>
+                          </CardHeader>
+
+                          <CardContent className="pt-0">
+                            <div className="mb-1">
+                              <EnhancedTemplatePreview
+                                template={template}
+                                isSelected={selectedTemplate?.id === template.id}
+                                onSelect={() => handleTemplateClick(template)}
+                                showDeviceFrames={true}
+                                containerWidth={500}
+                              />
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                  </div>
+                </div>
+
+                {/* Tablet Development Section */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 text-slate-900">
+                    📱 Tablet Development
+                  </h3>
+                  <div
+                    className={
+                      viewMode === "grid"
+                        ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                        : "space-y-4"
+                    }
+                  >
+                    {tabletTemplates
+                      .slice(0, Math.min(visibleCount, tabletTemplates.length))
+                      .map((template) => (
+                        <Card
+                          key={template.id}
+                          className={`cursor-pointer transition-all hover:shadow-lg ${
+                            selectedTemplate?.id === template.id
+                              ? "ring-2 ring-primary"
+                              : ""
+                          }`}
+                          onClick={() => handleTemplateClick(template)}
+                        >
+                          <CardHeader className="pb-1">
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <CardTitle className="text-sm">
+                                  {template.name}
+                                </CardTitle>
+                              </div>
+                              <Badge
+                                variant={
+                                  template.tier === "premium"
+                                    ? "default"
+                                    : "secondary"
+                                }
+                                className="text-xs"
+                              >
+                                {template.tier === "premium" ? "Premium" : "Free"}
+                              </Badge>
+                            </div>
+                          </CardHeader>
+
+                          <CardContent className="pt-0">
+                            <div className="mb-1">
+                              <EnhancedTemplatePreview
+                                template={template}
+                                isSelected={selectedTemplate?.id === template.id}
+                                onSelect={() => handleTemplateClick(template)}
+                                showDeviceFrames={true}
+                                containerWidth={500}
+                              />
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                  </div>
+                </div>
+
+                {/* Chrome Development Section */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 text-slate-900">
+                    🔧 Chrome Development
+                  </h3>
+                  <div
+                    className={
+                      viewMode === "grid"
+                        ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                        : "space-y-4"
+                    }
+                  >
+                    {chromeTemplates
+                      .slice(0, Math.min(visibleCount, chromeTemplates.length))
+                      .map((template) => (
+                        <Card
+                          key={template.id}
+                          className={`cursor-pointer transition-all hover:shadow-lg ${
+                            selectedTemplate?.id === template.id
+                              ? "ring-2 ring-primary"
+                              : ""
+                          }`}
+                          onClick={() => handleTemplateClick(template)}
+                        >
+                          <CardHeader className="pb-1">
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <CardTitle className="text-sm">
+                                  {template.name}
+                                </CardTitle>
+                              </div>
+                              <Badge
+                                variant={
+                                  template.tier === "premium"
+                                    ? "default"
+                                    : "secondary"
+                                }
+                                className="text-xs"
+                              >
+                                {template.tier === "premium" ? "Premium" : "Free"}
+                              </Badge>
+                            </div>
+                          </CardHeader>
+
+                          <CardContent className="pt-0">
+                            <div className="mb-1">
+                              <EnhancedTemplatePreview
+                                template={template}
+                                isSelected={selectedTemplate?.id === template.id}
+                                onSelect={() => handleTemplateClick(template)}
+                                showDeviceFrames={true}
+                                containerWidth={500}
+                              />
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                  </div>
                 </div>
               </div>
-
-              {/* Desktop Development Section */}
-              <div>
-                <h3 className="text-lg font-semibold mb-4 text-slate-900">
-                  🖥️ Desktop Development
-                </h3>
-                <div
-                  className={
-                    viewMode === "grid"
-                      ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-                      : "space-y-4"
-                  }
-                >
-                  {desktopTemplates
-                    .slice(0, Math.min(visibleCount, desktopTemplates.length))
-                    .map((template) => (
-                      <Card
-                        key={template.id}
-                        className={`cursor-pointer transition-all hover:shadow-lg ${
-                          selectedTemplate?.id === template.id
-                            ? "ring-2 ring-primary"
-                            : ""
-                        }`}
-                        onClick={() => handleTemplateClick(template)}
-                      >
-                        <CardHeader className="pb-1">
-                          <div className="flex items-start justify-between">
-                            <div className="flex-1">
-                              <CardTitle className="text-sm">
-                                {template.name}
-                              </CardTitle>
-                            </div>
-                            <Badge
-                              variant={
-                                template.tier === "premium"
-                                  ? "default"
-                                  : "secondary"
-                              }
-                              className="text-xs"
-                            >
-                              {template.tier === "premium" ? "Premium" : "Free"}
-                            </Badge>
-                          </div>
-                        </CardHeader>
-
-                        <CardContent className="pt-0">
-                          <div className="mb-1">
-                            <EnhancedTemplatePreview
-                              template={template}
-                              isSelected={selectedTemplate?.id === template.id}
-                              onSelect={() => handleTemplateClick(template)}
-                              showDeviceFrames={true}
-                              containerWidth={500}
-                            />
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                </div>
-              </div>
-
-              {/* Website Development Section */}
-              <div>
-                <h3 className="text-lg font-semibold mb-4 text-slate-900">
-                  🌐 Website Development
-                </h3>
-                <div
-                  className={
-                    viewMode === "grid"
-                      ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-                      : "space-y-4"
-                  }
-                >
-                  {websiteTemplates
-                    .slice(0, Math.min(visibleCount, websiteTemplates.length))
-                    .map((template) => (
-                      <Card
-                        key={template.id}
-                        className={`cursor-pointer transition-all hover:shadow-lg ${
-                          selectedTemplate?.id === template.id
-                            ? "ring-2 ring-primary"
-                            : ""
-                        }`}
-                        onClick={() => handleTemplateClick(template)}
-                      >
-                        <CardHeader className="pb-1">
-                          <div className="flex items-start justify-between">
-                            <div className="flex-1">
-                              <CardTitle className="text-sm">
-                                {template.name}
-                              </CardTitle>
-                            </div>
-                            <Badge
-                              variant={
-                                template.tier === "premium"
-                                  ? "default"
-                                  : "secondary"
-                              }
-                              className="text-xs"
-                            >
-                              {template.tier === "premium" ? "Premium" : "Free"}
-                            </Badge>
-                          </div>
-                        </CardHeader>
-
-                        <CardContent className="pt-0">
-                          <div className="mb-1">
-                            <EnhancedTemplatePreview
-                              template={template}
-                              isSelected={selectedTemplate?.id === template.id}
-                              onSelect={() => handleTemplateClick(template)}
-                              showDeviceFrames={true}
-                              containerWidth={500}
-                            />
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                </div>
-              </div>
-
-              {/* Tablet Development Section */}
-              <div>
-                <h3 className="text-lg font-semibold mb-4 text-slate-900">
-                  📱 Tablet Development
-                </h3>
-                <div
-                  className={
-                    viewMode === "grid"
-                      ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-                      : "space-y-4"
-                  }
-                >
-                  {tabletTemplates
-                    .slice(0, Math.min(visibleCount, tabletTemplates.length))
-                    .map((template) => (
-                      <Card
-                        key={template.id}
-                        className={`cursor-pointer transition-all hover:shadow-lg ${
-                          selectedTemplate?.id === template.id
-                            ? "ring-2 ring-primary"
-                            : ""
-                        }`}
-                        onClick={() => handleTemplateClick(template)}
-                      >
-                        <CardHeader className="pb-1">
-                          <div className="flex items-start justify-between">
-                            <div className="flex-1">
-                              <CardTitle className="text-sm">
-                                {template.name}
-                              </CardTitle>
-                            </div>
-                            <Badge
-                              variant={
-                                template.tier === "premium"
-                                  ? "default"
-                                  : "secondary"
-                              }
-                              className="text-xs"
-                            >
-                              {template.tier === "premium" ? "Premium" : "Free"}
-                            </Badge>
-                          </div>
-                        </CardHeader>
-
-                        <CardContent className="pt-0">
-                          <div className="mb-1">
-                            <EnhancedTemplatePreview
-                              template={template}
-                              isSelected={selectedTemplate?.id === template.id}
-                              onSelect={() => handleTemplateClick(template)}
-                              showDeviceFrames={true}
-                              containerWidth={500}
-                            />
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                </div>
-              </div>
-
-              {/* Chrome Development Section */}
-              <div>
-                <h3 className="text-lg font-semibold mb-4 text-slate-900">
-                  🔧 Chrome Development
-                </h3>
-                <div
-                  className={
-                    viewMode === "grid"
-                      ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-                      : "space-y-4"
-                  }
-                >
-                  {chromeTemplates
-                    .slice(0, Math.min(visibleCount, chromeTemplates.length))
-                    .map((template) => (
-                      <Card
-                        key={template.id}
-                        className={`cursor-pointer transition-all hover:shadow-lg ${
-                          selectedTemplate?.id === template.id
-                            ? "ring-2 ring-primary"
-                            : ""
-                        }`}
-                        onClick={() => handleTemplateClick(template)}
-                      >
-                        <CardHeader className="pb-1">
-                          <div className="flex items-start justify-between">
-                            <div className="flex-1">
-                              <CardTitle className="text-sm">
-                                {template.name}
-                              </CardTitle>
-                            </div>
-                            <Badge
-                              variant={
-                                template.tier === "premium"
-                                  ? "default"
-                                  : "secondary"
-                              }
-                              className="text-xs"
-                            >
-                              {template.tier === "premium" ? "Premium" : "Free"}
-                            </Badge>
-                          </div>
-                        </CardHeader>
-
-                        <CardContent className="pt-0">
-                          <div className="mb-1">
-                            <EnhancedTemplatePreview
-                              template={template}
-                              isSelected={selectedTemplate?.id === template.id}
-                              onSelect={() => handleTemplateClick(template)}
-                              showDeviceFrames={true}
-                              containerWidth={500}
-                            />
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                </div>
-              </div>
-            </div>
-          </TabsContent>
-        </Tabs>
-      </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+      )}
     </div>
   );
 }

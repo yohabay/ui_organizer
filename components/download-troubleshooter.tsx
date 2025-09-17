@@ -67,7 +67,7 @@ export function DownloadTroubleshooter({
       case "warning":
         return "default";
       case "info":
-        return "secondary";
+        return "default";
       default:
         return "default";
     }

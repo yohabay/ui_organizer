@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { Slider } from "@/components/ui/slider"
 import { Label } from "@/components/ui/label"
 import { Shuffle, RotateCcw, Layers, Palette, Zap } from "lucide-react"
-import type { Template, Screenshot, ArrangementSlot } from "@/types"
+import type { Template, Screenshot, ArrangementSlot, ProjectType } from "@/types"
 import { cn } from "@/lib/utils"
 // Import the new component
 import { ScreenshotLibrary } from "@/components/screenshot-library"
@@ -18,6 +18,7 @@ interface AdvancedArrangementCanvasProps {
   template: Template
   screenshots: Screenshot[]
   arrangement: ArrangementSlot[]
+  projectType: ProjectType
   onArrangementChange: (arrangement: ArrangementSlot[]) => void
   draggedScreenshot: Screenshot | null
   draggedFromSlot: string | null
@@ -407,6 +408,7 @@ export function AdvancedArrangementCanvas({
         <div className="lg:col-span-1">
           <ScreenshotLibrary
             screenshots={unassignedScreenshots}
+            projectType="website" // Default projectType for unused component
             onScreenshotSelect={(screenshot) => {
               // Auto-assign to first empty slot
               const emptySlotIndex = arrangement.findIndex((slot) => !slot.screenshot)

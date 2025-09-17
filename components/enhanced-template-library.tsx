@@ -144,7 +144,7 @@ export default function EnhancedTemplateLibrary({
     // Add device frame templates
     const deviceFrames = deviceFrameTemplates.map((t, index) => ({
       ...t,
-      tier: t.isPremium ? ("premium" as const) : ("free" as const),
+      tier: t.tier,
       id: `device-frame-${index}-${t.id}`,
     }));
 

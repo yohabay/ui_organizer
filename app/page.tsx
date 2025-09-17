@@ -482,12 +482,13 @@ export default function Home() {
 
     return {
       id: `dynamic-${screenshotCount}`,
-      name: `Dynamic Layout (${screenshotCount} screenshots)`,
       description: `Automatically generated layout for ${screenshotCount} screenshots`,
       category: "Dynamic Layouts",
       projectTypes: ["website", "mobile", "desktop"] as ProjectType[],
       ...selectedLayout,
+      name: `Dynamic Layout (${screenshotCount} screenshots)`,
       preview: `/template-previews/dynamic-${screenshotCount}.jpg`,
+      tier: "free",
       tags: ["dynamic", "auto-generated", "responsive"],
     };
   };
