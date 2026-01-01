@@ -40,6 +40,7 @@ import { Template } from "@/types";
 import { Grid, List, Search } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { EnhancedTemplatePreview } from "./enhanced-template-preview";
+import { PaymentModal } from "./payment-modal";
 
 interface EnhancedTemplateLibraryV2Props {
   onTemplateSelect: (template: Template) => void;
@@ -54,14 +55,35 @@ export default function EnhancedTemplateLibraryV2({
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedPlatform, setSelectedPlatform] = useState("all");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [visibleCount, setVisibleCount] = useState(10); // Show only 10 templates initially
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+   const [visibleCountAll, setVisibleCountAll] = useState(5); // Show 5 templates initially for all
+   const [isMounted, setIsMounted] = useState(false);
+   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
+   const [selectedPremiumTemplate, setSelectedPremiumTemplate] = useState<Template | null>(null);
+   const [purchasedTemplates, setPurchasedTemplates] = useState<Set<string>>(new Set());
+ 
+   useEffect(() => {
+     setIsMounted(true);
+     // Preload critical images when component mounts
+     const preloadCriticalImages = () => {
+       // Preload first few template preview images
+       const criticalImages = [
+         '/template-previews/website/profile-1.png',
+         '/template-previews/mobileapp/photo_2025-07-29_19-39-34.jpg',
+         '/template-previews/desctopapp/Frame 1.png',
+         '/template-previews/tablet/_hotel-1.png'
+       ];
+ 
+       criticalImages.forEach(src => {
+         const img = new Image();
+         img.src = src;
+       });
+     };
+ 
+     preloadCriticalImages();
+   }, []);
 
   const allTemplates = useMemo(() => {
+    // Limit to only 200 templates total as requested
     return [
       ...allCategoryTemplates,
       ...allMissingTemplates,
@@ -85,7 +107,7 @@ export default function EnhancedTemplateLibraryV2({
       ...websiteTemplates,
       ...tabletTemplates,
       ...chromeTemplates,
-    ];
+    ].slice(0, 200); // Limit to 200 templates maximum
   }, [
     allCategoryTemplates,
     allMissingTemplates,
@@ -175,16 +197,31 @@ export default function EnhancedTemplateLibraryV2({
     return filtered;
   }, [allTemplates, searchQuery, selectedCategory, selectedPlatform]);
 
-  // Get only the visible templates for pagination
-  const visibleTemplates = useMemo(() => {
-    return filteredTemplates.slice(0, visibleCount);
-  }, [filteredTemplates, visibleCount]);
+  // Get only the visible templates for pagination based on current tab
+   const getVisibleTemplates = (count: number) => {
+     return filteredTemplates.slice(0, count);
+   };
 
-  const handleLoadMore = () => {
-    setVisibleCount((prev) => prev + 10); // Load 10 more templates
-  };
+   const handleLoadMoreAll = () => {
+     setVisibleCountAll((prev) => Math.min(prev + 5, 200)); // Load 5 more, max 200 total
+   };
 
   const handleTemplateClick = (template: Template) => {
+    // Check if template is premium and not purchased
+    if (template.tier === "premium" && !purchasedTemplates.has(template.id)) {
+      setSelectedPremiumTemplate(template);
+      setPaymentModalOpen(true);
+      return;
+    }
+
+    // Template is free or already purchased - select immediately
+    onTemplateSelect(template);
+  };
+
+  const handlePaymentSuccess = (template: Template) => {
+    // Add template to purchased list
+    setPurchasedTemplates(prev => new Set([...prev, template.id]));
+    // Select the template
     onTemplateSelect(template);
   };
 
@@ -259,21 +296,24 @@ export default function EnhancedTemplateLibraryV2({
       </div>
 
       {/* Template Count Display */}
-      {isMounted && (
-        <div className="text-sm text-muted-foreground">
-          Showing {visibleTemplates.length} of {filteredTemplates.length}{" "}
-          templates
-        </div>
-      )}
+       {isMounted && (
+         <div className="text-sm text-muted-foreground">
+           Showing {getVisibleTemplates(visibleCountAll).length} of {filteredTemplates.length}{" "}
+           templates
+         </div>
+       )}
 
       {/* Templates Grid */}
       {isMounted && (
         <div className="space-y-6">
           <Tabs
-            defaultValue="all"
-            className="w-full"
-            onValueChange={() => setVisibleCount(10)}
-          >
+             defaultValue="all"
+             className="w-full"
+             onValueChange={() => {
+               // Reset counts when switching tabs
+               setVisibleCountAll(5);
+             }}
+           >
             <TabsList className="grid w-full grid-cols-4">
               <TabsTrigger value="all">All</TabsTrigger>
               <TabsTrigger value="free">Free</TabsTrigger>
@@ -282,14 +322,14 @@ export default function EnhancedTemplateLibraryV2({
             </TabsList>
 
             <TabsContent value="all" className="space-y-6">
-              <div
-                className={
-                  viewMode === "grid"
-                    ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-                    : "space-y-4"
-                }
-              >
-                {visibleTemplates.map((template) => (
+               <div
+                 className={
+                   viewMode === "grid"
+                     ? "grid grid-cols-1 sm:grid-cols-2  gap-4"
+                     : "space-y-4"
+                 }
+               >
+                 {getVisibleTemplates(visibleCountAll).map((template) => (
                   <Card
                     key={template.id}
                     className={`cursor-pointer transition-all hover:shadow-lg ${
@@ -312,7 +352,11 @@ export default function EnhancedTemplateLibraryV2({
                           }
                           className="text-xs"
                         >
-                          {template.tier === "premium" ? "Premium" : "Free"}
+                          {template.tier === "premium" && purchasedTemplates.has(template.id)
+                            ? "Purchased"
+                            : template.tier === "premium"
+                            ? "$10"
+                            : "Free"}
                         </Badge>
                       </div>
                     </CardHeader>
@@ -333,15 +377,15 @@ export default function EnhancedTemplateLibraryV2({
               </div>
 
               {/* Load More Button */}
-              {visibleTemplates.length < filteredTemplates.length && (
+              {getVisibleTemplates(visibleCountAll).length < filteredTemplates.length && (
                 <div className="flex justify-center mt-6">
                   <Button
-                    onClick={handleLoadMore}
+                    onClick={handleLoadMoreAll}
                     variant="outline"
                     className="px-8"
                   >
                     Load More Templates (
-                    {filteredTemplates.length - visibleTemplates.length}{" "}
+                    {filteredTemplates.length - getVisibleTemplates(visibleCountAll).length}{" "}
                     remaining)
                   </Button>
                 </div>
@@ -349,17 +393,17 @@ export default function EnhancedTemplateLibraryV2({
             </TabsContent>
 
             <TabsContent value="free" className="space-y-6">
-              <div
-                className={
-                  viewMode === "grid"
-                    ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-                    : "space-y-4"
-                }
-              >
-                {filteredTemplates
-                  .filter((template) => template.tier === "free")
-                  .slice(0, visibleCount)
-                  .map((template) => (
+               <div
+                 className={
+                   viewMode === "grid"
+                     ? "grid grid-cols-1 sm:grid-cols-2 gap-4"
+                     : "space-y-4"
+                 }
+               >
+                 {filteredTemplates
+                   .filter((template) => template.tier === "free")
+                   .slice(0, visibleCountAll)
+                   .map((template) => (
                     <Card
                       key={template.id}
                       className={`cursor-pointer transition-all hover:shadow-lg ${
@@ -397,31 +441,31 @@ export default function EnhancedTemplateLibraryV2({
                   ))}
               </div>
               {filteredTemplates.filter((template) => template.tier === "free")
-                .length > visibleCount && (
+                .length > visibleCountAll && (
                 <div className="flex justify-center mt-6">
                   <Button
-                    onClick={handleLoadMore}
+                    onClick={handleLoadMoreAll}
                     variant="outline"
                     className="px-8"
                   >
-                    Load More
+                    Load More Free Templates
                   </Button>
                 </div>
               )}
             </TabsContent>
 
             <TabsContent value="premium" className="space-y-6">
-              <div
-                className={
-                  viewMode === "grid"
-                    ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-                    : "space-y-4"
-                }
-              >
-                {filteredTemplates
-                  .filter((template) => template.tier === "premium")
-                  .slice(0, visibleCount)
-                  .map((template) => (
+               <div
+                 className={
+                   viewMode === "grid"
+                     ? "grid grid-cols-1 sm:grid-cols-2 gap-4"
+                     : "space-y-4"
+                 }
+               >
+                 {filteredTemplates
+                   .filter((template) => template.tier === "premium")
+                   .slice(0, visibleCountAll)
+                   .map((template) => (
                     <Card
                       key={template.id}
                       className={`cursor-pointer transition-all hover:shadow-lg ${
@@ -460,14 +504,14 @@ export default function EnhancedTemplateLibraryV2({
               </div>
               {filteredTemplates.filter(
                 (template) => template.tier === "premium"
-              ).length > visibleCount && (
+              ).length > visibleCountAll && (
                 <div className="flex justify-center mt-6">
                   <Button
-                    onClick={handleLoadMore}
+                    onClick={handleLoadMoreAll}
                     variant="outline"
                     className="px-8"
                   >
-                    Load More
+                    Load More Premium Templates
                   </Button>
                 </div>
               )}
@@ -477,7 +521,7 @@ export default function EnhancedTemplateLibraryV2({
               <div
                 className={
                   viewMode === "grid"
-                    ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                    ? "grid grid-cols-1 sm:grid-cols-2 gap-4"
                     : "space-y-4"
                 }
               >
@@ -487,7 +531,7 @@ export default function EnhancedTemplateLibraryV2({
                       template.tags.includes("ecommerce") ||
                       template.category.includes("E-commerce")
                   )
-                  .slice(0, visibleCount)
+                  .slice(0, visibleCountAll)
                   .map((template) => (
                     <Card
                       key={template.id}
@@ -536,14 +580,14 @@ export default function EnhancedTemplateLibraryV2({
                 (template) =>
                   template.tags.includes("ecommerce") ||
                   template.category.includes("E-commerce")
-              ).length > visibleCount && (
+              ).length > visibleCountAll && (
                 <div className="flex justify-center mt-6">
                   <Button
-                    onClick={handleLoadMore}
+                    onClick={handleLoadMoreAll}
                     variant="outline"
                     className="px-8"
                   >
-                    Load More
+                    Load More E-commerce Templates
                   </Button>
                 </div>
               )}
@@ -553,7 +597,7 @@ export default function EnhancedTemplateLibraryV2({
               <div
                 className={
                   viewMode === "grid"
-                    ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                    ? "grid grid-cols-1 sm:grid-cols-2 gap-4"
                     : "space-y-4"
                 }
               >
@@ -563,7 +607,7 @@ export default function EnhancedTemplateLibraryV2({
                       template.tags.includes("social") ||
                       template.category.includes("Social")
                   )
-                  .slice(0, visibleCount)
+                  .slice(0, visibleCountAll)
                   .map((template) => (
                     <Card
                       key={template.id}
@@ -612,14 +656,14 @@ export default function EnhancedTemplateLibraryV2({
                 (template) =>
                   template.tags.includes("social") ||
                   template.category.includes("Social")
-              ).length > visibleCount && (
+              ).length > visibleCountAll && (
                 <div className="flex justify-center mt-6">
                   <Button
-                    onClick={handleLoadMore}
+                    onClick={handleLoadMoreAll}
                     variant="outline"
                     className="px-8"
                   >
-                    Load More
+                    Load More Social Templates
                   </Button>
                 </div>
               )}
@@ -635,12 +679,12 @@ export default function EnhancedTemplateLibraryV2({
                   <div
                     className={
                       viewMode === "grid"
-                        ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                        ? "grid grid-cols-1 sm:grid-cols-2  gap-4"
                         : "space-y-4"
                     }
                   >
                     {mobileTemplates
-                      .slice(0, Math.min(visibleCount, mobileTemplates.length))
+                      .slice(0, Math.min(visibleCountAll, mobileTemplates.length))
                       .map((template) => (
                         <Card
                           key={template.id}
@@ -695,12 +739,12 @@ export default function EnhancedTemplateLibraryV2({
                   <div
                     className={
                       viewMode === "grid"
-                        ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                        ? "grid grid-cols-1 sm:grid-cols-2  gap-4"
                         : "space-y-4"
                     }
                   >
                     {desktopTemplates
-                      .slice(0, Math.min(visibleCount, desktopTemplates.length))
+                      .slice(0, Math.min(visibleCountAll, desktopTemplates.length))
                       .map((template) => (
                         <Card
                           key={template.id}
@@ -755,12 +799,12 @@ export default function EnhancedTemplateLibraryV2({
                   <div
                     className={
                       viewMode === "grid"
-                        ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                        ? "grid grid-cols-1 sm:grid-cols-2  gap-4"
                         : "space-y-4"
                     }
                   >
                     {websiteTemplates
-                      .slice(0, Math.min(visibleCount, websiteTemplates.length))
+                      .slice(0, Math.min(visibleCountAll, websiteTemplates.length))
                       .map((template) => (
                         <Card
                           key={template.id}
@@ -815,12 +859,12 @@ export default function EnhancedTemplateLibraryV2({
                   <div
                     className={
                       viewMode === "grid"
-                        ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                        ? "grid grid-cols-1 sm:grid-cols-2  gap-4"
                         : "space-y-4"
                     }
                   >
                     {tabletTemplates
-                      .slice(0, Math.min(visibleCount, tabletTemplates.length))
+                      .slice(0, Math.min(visibleCountAll, tabletTemplates.length))
                       .map((template) => (
                         <Card
                           key={template.id}
@@ -875,12 +919,12 @@ export default function EnhancedTemplateLibraryV2({
                   <div
                     className={
                       viewMode === "grid"
-                        ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                        ? "grid grid-cols-1 sm:grid-cols-2  gap-4"
                         : "space-y-4"
                     }
                   >
                     {chromeTemplates
-                      .slice(0, Math.min(visibleCount, chromeTemplates.length))
+                      .slice(0, Math.min(visibleCountAll, chromeTemplates.length))
                       .map((template) => (
                         <Card
                           key={template.id}
@@ -931,6 +975,17 @@ export default function EnhancedTemplateLibraryV2({
           </Tabs>
         </div>
       )}
+
+      {/* Payment Modal */}
+      <PaymentModal
+        template={selectedPremiumTemplate}
+        isOpen={paymentModalOpen}
+        onClose={() => {
+          setPaymentModalOpen(false);
+          setSelectedPremiumTemplate(null);
+        }}
+        onPaymentSuccess={handlePaymentSuccess}
+      />
     </div>
   );
 }

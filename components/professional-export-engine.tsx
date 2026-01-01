@@ -175,9 +175,10 @@ export function ProfessionalExportEngine({
       throw new Error("No template available for export");
     }
 
-    // Increase canvas size for better quality and spacing
-    const canvasWidth = (templateToUse.cols || 12) * 120;
-    const canvasHeight = (templateToUse.rows || 8) * 120;
+    // Increase canvas size significantly for better quality and larger images
+    const baseSize = Math.max(400, 800 / Math.max(templateToUse.cols || 12, templateToUse.rows || 8)); // Minimum 400px per unit, or scale up small grids
+    const canvasWidth = Math.max(2400, (templateToUse.cols || 12) * baseSize); // Minimum 2400px width
+    const canvasHeight = Math.max(1600, (templateToUse.rows || 8) * baseSize); // Minimum 1600px height
 
     const canvas = document.createElement("canvas");
     canvas.width = canvasWidth;
@@ -199,14 +200,10 @@ export function ProfessionalExportEngine({
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-    // Calculate cell dimensions with proper spacing
-    const gap = 8; // Gap between cells
-    const cellWidth =
-      (canvasWidth - gap * (templateToUse.cols || 12 + 1)) /
-      (templateToUse.cols || 12);
-    const cellHeight =
-      (canvasHeight - gap * (templateToUse.rows || 8 + 1)) /
-      (templateToUse.rows || 8);
+    // Calculate cell dimensions with minimal spacing to maximize image size
+    const gap = 4; // Reduced gap from 8 to 4 for more image space
+    const cellWidth = (canvasWidth - gap * ((templateToUse.cols || 12) - 1)) / (templateToUse.cols || 12);
+    const cellHeight = (canvasHeight - gap * ((templateToUse.rows || 8) - 1)) / (templateToUse.rows || 8);
 
     // Process each slot exactly as defined in template
     for (let i = 0; i < arrangementData.length; i++) {
@@ -218,8 +215,8 @@ export function ProfessionalExportEngine({
         continue;
       }
 
-      // Calculate position and size exactly as template defines with gaps
-      const gap = 8;
+      // Calculate position and size exactly as template defines with minimal gaps for larger images
+      const gap = 4; // Reduced gap for more image space
       const x = slot.x * (cellWidth + gap) + gap;
       const y = slot.y * (cellHeight + gap) + gap;
       const width = slot.w * cellWidth + (slot.w - 1) * gap;
@@ -277,9 +274,9 @@ export function ProfessionalExportEngine({
         }
 
         // Apply rotation only if explicitly specified
-        const shouldRotate = slot.rotation && Math.abs(slot.rotation) < 45;
+        const shouldRotate = slot.rotation !== undefined && Math.abs(slot.rotation) < 45;
 
-        if (shouldRotate) {
+        if (shouldRotate && slot.rotation !== undefined) {
           ctx.save();
           const centerX = x + width / 2;
           const centerY = y + height / 2;
@@ -716,9 +713,9 @@ export function ProfessionalExportEngine({
     );
     const deviceFrame = templateSlot?.deviceFrame;
 
-    if (deviceFrame && deviceFrame !== "none") {
-      // Create device-specific frame
-      const deviceFrameWrapper = document.createElement("div");
+    if (deviceFrame && deviceFrame !== "none" && deviceFrame !== undefined) {
+      // Create device-specific frame 
+      const deviceFrameWrapper = document.createElement("div"); 
       deviceFrameWrapper.style.width = "100%";
       deviceFrameWrapper.style.height = "100%";
       deviceFrameWrapper.style.position = "relative";
@@ -1389,16 +1386,44 @@ export function ProfessionalExportEngine({
       slots,
       preview: `/template-previews/dynamic-${screenshotCount}.jpg`,
       tags: ["dynamic", "auto-generated", "grid"],
+      tier: "free",
     };
   };
 
   // Smart template selection based on screenshot count
   const getOptimalTemplate = (screenshotCount: number): Template => {
-    // If a template is explicitly selected and it has enough slots, use it.
-    // Otherwise, generate a dynamic template that can hold all screenshots.
     if (template && template.slots.length >= screenshotCount) {
       return template;
     }
+
+    if (template && template.tier === "premium" && template.slots.length > 0) {
+      const originalSlots = template.slots;
+      const originalSlotCount = originalSlots.length;
+      const newSlots: TemplateSlot[] = [...originalSlots];
+      
+      const layoutHeight = Math.max(...originalSlots.map(s => s.y + s.h));
+
+      let i = 0;
+      while (newSlots.length < screenshotCount) {
+        const slotToCopy = originalSlots[i % originalSlotCount];
+        const repetition = Math.floor(i / originalSlotCount) + 1;
+        
+        const newSlot: TemplateSlot = {
+          ...slotToCopy,
+          y: slotToCopy.y + (layoutHeight * repetition),
+        };
+        newSlots.push(newSlot);
+        i++;
+      }
+
+      return {
+        ...template,
+        slots: newSlots,
+        rows: Math.max(...newSlots.map(s => s.y + s.h)),
+        name: `${template.name} (Extended)`,
+      };
+    }
+
     return generateDynamicTemplate(screenshotCount);
   };
 
@@ -1421,7 +1446,7 @@ export function ProfessionalExportEngine({
             {/* Export Format */}
             <div className="space-y-2">
               <Label htmlFor="export-format">Export Format</Label>
-              <Select value={exportFormat} onValueChange={setExportFormat}>
+              <Select value={exportFormat} onValueChange={(value: "png" | "pdf" | "jpg") => setExportFormat(value)}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select format" />
                 </SelectTrigger>

@@ -169,11 +169,20 @@ export default function EnhancedTemplateLibrary({
   const filteredTemplates = useMemo(() => {
     let filtered = allTemplates;
 
-    // Filter by tab (all, free, premium)
+    // Filter by tab (all, free, premium, device-specific)
     if (activeTab === "free") {
       filtered = filtered.filter((t) => t.tier === "free");
     } else if (activeTab === "premium") {
       filtered = filtered.filter((t) => t.tier === "premium");
+    } else if (activeTab === "device-specific") {
+      filtered = filtered.filter((t) =>
+        t.tier === "premium" &&
+        (t.category.includes("Mobile") ||
+         t.category.includes("Desktop") ||
+         t.category.includes("Website") ||
+         t.category.includes("Tablet") ||
+         t.category.includes("Chrome"))
+      );
     }
 
     // Filter by search query
@@ -276,7 +285,7 @@ export default function EnhancedTemplateLibrary({
 
       {/* Tabs for All/Free/Premium */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="all">
             All Templates ({allTemplates.length})
           </TabsTrigger>
@@ -286,9 +295,54 @@ export default function EnhancedTemplateLibrary({
           <TabsTrigger value="premium">
             Premium ({allTemplates.filter((t) => t.tier === "premium").length})
           </TabsTrigger>
+          <TabsTrigger value="device-specific">
+            Device Specific ({allTemplates.filter((t) => t.tier === "premium" && (t.category.includes("Mobile") || t.category.includes("Desktop") || t.category.includes("Website") || t.category.includes("Tablet") || t.category.includes("Chrome"))).length})
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value={activeTab} className="space-y-4">
+          {/* Device Specific Sub-tabs when in device-specific tab */}
+          {activeTab === "device-specific" && (
+            <div className="mb-4">
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setSelectedCategory("mobile-development")}
+                >
+                  Mobile ({allTemplates.filter((t) => t.tier === "premium" && t.category.includes("Mobile")).length})
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setSelectedCategory("desktop-development")}
+                >
+                  Desktop ({allTemplates.filter((t) => t.tier === "premium" && t.category.includes("Desktop")).length})
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setSelectedCategory("website-development")}
+                >
+                  Website ({allTemplates.filter((t) => t.tier === "premium" && t.category.includes("Website")).length})
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setSelectedCategory("tablet-development")}
+                >
+                  Tablet ({allTemplates.filter((t) => t.tier === "premium" && t.category.includes("Tablet")).length})
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setSelectedCategory("chrome-development")}
+                >
+                  Chrome ({allTemplates.filter((t) => t.tier === "premium" && t.category.includes("Chrome")).length})
+                </Button>
+              </div>
+            </div>
+          )}
           {/* Filters */}
           <div className="flex flex-col sm:flex-row gap-4">
             {/* Search */}
@@ -388,7 +442,7 @@ export default function EnhancedTemplateLibrary({
                           template.tier === "premium" ? "default" : "secondary"
                         }
                       >
-                        {template.tier === "premium" ? "Premium" : "Free"}
+                        {template.tier === "premium" ? "$10" : "Free"}
                       </Badge>
                     </div>
                   </CardHeader>

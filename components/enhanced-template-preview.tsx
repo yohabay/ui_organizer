@@ -98,23 +98,16 @@ export function EnhancedTemplatePreview({
     imgElement.src = imageUrl;
   }, []);
 
-  // Load images with delay to prevent overwhelming the browser
+  // Load images immediately when component mounts (no delay)
   useEffect(() => {
     setImageAssignments(memoizedImageAssignments);
     setIsLoading(false);
 
-    // Load images with staggered delay to prevent lag
-    const loadImagesWithDelay = async () => {
-      const entries = Object.entries(memoizedImageAssignments);
-
-      for (let i = 0; i < entries.length; i++) {
-        const [index, imageUrl] = entries[i];
-        await new Promise((resolve) => setTimeout(resolve, i * 50)); // 50ms delay between each image
-        loadImage(parseInt(index as any), imageUrl as string);
-      }
-    };
-
-    loadImagesWithDelay();
+    // Load all images immediately without delay for better UX
+    const entries = Object.entries(memoizedImageAssignments);
+    entries.forEach(([index, imageUrl]) => {
+      loadImage(parseInt(index as any), imageUrl as string);
+    });
   }, [memoizedImageAssignments, loadImage]);
 
   const getDeviceIcon = (deviceContext: string) => {
@@ -232,7 +225,7 @@ export function EnhancedTemplatePreview({
                     src={imageUrl}
                     alt={`${deviceContext} screenshot`}
                     className="w-full h-full object-cover"
-                    loading="lazy"
+                    loading="eager"
                     style={{
                       borderRadius:
                         slot.borderRadius === "full"
@@ -256,7 +249,7 @@ export function EnhancedTemplatePreview({
                 src={imageUrl}
                 alt={`${deviceContext} screenshot`}
                 className="w-full h-full object-cover"
-                loading="lazy"
+                loading="eager"
                 style={{
                   borderRadius:
                     slot.borderRadius === "full"
