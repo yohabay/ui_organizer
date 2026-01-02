@@ -1,4 +1,4 @@
-import type { Template } from "@/types";
+import type { ProjectType, Template, TemplateSlot } from "@/types";
 
 // Modern layout patterns for unique templates
 const modernLayouts = [
@@ -715,7 +715,7 @@ const categories = [
 
 // Generate unique templates
 function generateTemplates() {
-  const templates = [];
+  const templates: Template[] = [];
   let templateId = 1;
 
   categories.forEach((category, categoryIndex) => {
@@ -742,10 +742,10 @@ function generateTemplates() {
           " "
         )} layout`,
         category: category,
-        projectTypes: ["website", "mobile"],
+        projectTypes: ["website", "mobile"] as ProjectType[],
         rows: 10,
         cols: 10,
-        slots: layoutPattern.slots.map((slot) => ({ ...slot })),
+        slots: layoutPattern.slots.map((slot) => ({ ...slot })) as TemplateSlot[],
         preview: `/template-previews/${prefix}-${category
           .toLowerCase()
           .replace(/[^a-z0-9]/g, "-")}-${templateId}.jpg`,
@@ -755,7 +755,7 @@ function generateTemplates() {
           "modern",
           "unique",
         ],
-        tier: tier,
+        tier: tier as "free" | "premium",
       };
 
       templates.push(template);

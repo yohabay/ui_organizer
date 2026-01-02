@@ -85,6 +85,7 @@ export interface RealProject {
   description: string;
   platform: string;
   industry: string;
+  screenshots?: string[];
 }
 
 export interface Template {

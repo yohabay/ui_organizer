@@ -24,6 +24,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "iphone-single",
     tags: ["iphone", "mobile", "single", "device-frame"],
+    tier: "premium",
   },
   {
     id: "iphone-duo",
@@ -57,6 +58,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "iphone-duo",
     tags: ["iphone", "mobile", "duo", "device-frame"],
+    tier: "premium",
   },
   {
     id: "iphone-trio",
@@ -100,6 +102,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "iphone-trio",
     tags: ["iphone", "mobile", "trio", "device-frame"],
+    tier: "premium",
   },
 
   // Android Templates
@@ -125,6 +128,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "android-single",
     tags: ["android", "mobile", "single", "device-frame"],
+    tier: "premium",
   },
   {
     id: "android-duo",
@@ -158,6 +162,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "android-duo",
     tags: ["android", "mobile", "duo", "device-frame"],
+    tier: "premium",
   },
 
   // Tablet Templates
@@ -183,6 +188,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "tablet-single",
     tags: ["tablet", "mobile", "single", "device-frame"],
+    tier: "premium",
   },
   {
     id: "tablet-duo",
@@ -216,6 +222,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "tablet-duo",
     tags: ["tablet", "mobile", "duo", "device-frame"],
+    tier: "premium",
   },
 
   // Browser Templates
@@ -241,6 +248,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "browser-single",
     tags: ["browser", "website", "single", "device-frame"],
+    tier: "premium",
   },
   {
     id: "browser-duo",
@@ -274,6 +282,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "browser-duo",
     tags: ["browser", "website", "duo", "device-frame"],
+    tier: "premium",
   },
 
   // Mixed Device Templates
@@ -309,6 +318,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "mobile-web-combo",
     tags: ["iphone", "browser", "combo", "device-frame"],
+    tier: "premium",
   },
   {
     id: "tablet-phone-combo",
@@ -342,6 +352,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "tablet-phone-combo",
     tags: ["tablet", "iphone", "combo", "device-frame"],
+    tier: "premium",
   },
 
   // Premium Device Frame Templates
@@ -388,7 +399,8 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "premium-device-showcase",
     tags: ["premium", "showcase", "multiple-devices", "device-frame"],
-    isPremium: true,
+    tier: "premium",
+
   },
   {
     id: "premium-mobile-gallery",
@@ -434,6 +446,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "premium-mobile-gallery",
     tags: ["premium", "gallery", "multiple-mobile", "device-frame"],
-    isPremium: true,
+    tier: "premium",
+
   },
 ];

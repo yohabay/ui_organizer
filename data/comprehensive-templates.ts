@@ -19,7 +19,7 @@ export const freeTemplates: Template[] = [
     ],
     preview: "simple-grid",
     tags: ["free", "basic", "grid", "clean"],
-    isPremium: false,
+    tier: "free",
     realProject: {
       name: "Personal Portfolio",
       description:
@@ -51,7 +51,7 @@ export const freeTemplates: Template[] = [
     ],
     preview: "hero-grid",
     tags: ["free", "hero", "grid", "landing"],
-    isPremium: false,
+    tier: "free",
     realProject: {
       name: "SaaS Landing Page",
       description: "Modern SaaS landing page with hero and feature sections",
@@ -84,7 +84,7 @@ export const freeTemplates: Template[] = [
     ],
     preview: "masonry-basic",
     tags: ["free", "masonry", "creative", "pinterest"],
-    isPremium: false,
+    tier: "free",
     realProject: {
       name: "Design Portfolio Gallery",
       description: "Creative portfolio showcasing various design projects",
@@ -120,7 +120,7 @@ export const freeTemplates: Template[] = [
     ],
     preview: "mobile-storyboard",
     tags: ["free", "mobile", "storyboard", "flow"],
-    isPremium: false,
+    tier: "free",
     realProject: {
       name: "Food Delivery App",
       description: "Complete food delivery app user flow",
@@ -156,7 +156,7 @@ export const freeTemplates: Template[] = [
     ],
     preview: "focus-grid",
     tags: ["free", "focus", "minimalist", "center"],
-    isPremium: false,
+    tier: "free",
     realProject: {
       name: "Product Showcase",
       description: "Product landing page with main feature focus",
@@ -190,7 +190,7 @@ export const freeTemplates: Template[] = [
     ],
     preview: "sidebar-layout",
     tags: ["free", "sidebar", "traditional", "admin"],
-    isPremium: false,
+    tier: "free",
     realProject: {
       name: "Admin Dashboard",
       description: "Business admin dashboard with navigation sidebar",
@@ -227,7 +227,7 @@ export const freeTemplates: Template[] = [
     ],
     preview: "card-grid",
     tags: ["free", "cards", "grid", "uniform"],
-    isPremium: false,
+    tier: "free",
     realProject: {
       name: "E-commerce Product Grid",
       description: "Online store product catalog with uniform cards",
@@ -266,7 +266,7 @@ export const freeTemplates: Template[] = [
     ],
     preview: "timeline-layout",
     tags: ["free", "timeline", "chronological", "vertical"],
-    isPremium: false,
+    tier: "free",
     realProject: {
       name: "Company History",
       description: "Corporate timeline showing company milestones",
@@ -304,7 +304,7 @@ export const freeTemplates: Template[] = [
     ],
     preview: "gallery-grid",
     tags: ["free", "gallery", "photos", "images"],
-    isPremium: false,
+    tier: "free",
     realProject: {
       name: "Photography Portfolio",
       description: "Professional photography portfolio with featured images",
@@ -343,7 +343,7 @@ export const freeTemplates: Template[] = [
     ],
     preview: "blog-layout",
     tags: ["free", "blog", "articles", "content"],
-    isPremium: false,
+    tier: "free",
     realProject: {
       name: "Tech Blog",
       description: "Technology blog with featured articles and sidebar",
@@ -377,7 +377,7 @@ export const freeTemplates: Template[] = [
     ],
     preview: "pricing-table",
     tags: ["free", "pricing", "business", "comparison"],
-    isPremium: false,
+    tier: "free",
     realProject: {
       name: "SaaS Pricing Page",
       description: "Software pricing page with three subscription tiers",
@@ -412,7 +412,7 @@ export const freeTemplates: Template[] = [
     ],
     preview: "team-grid",
     tags: ["free", "team", "people", "profiles"],
-    isPremium: false,
+    tier: "free",
     realProject: {
       name: "Agency Team Page",
       description: "Creative agency team showcase with member profiles",
@@ -453,7 +453,7 @@ export const freeTemplates: Template[] = [
     ],
     preview: "feature-grid",
     tags: ["free", "features", "product", "icons"],
-    isPremium: false,
+    tier: "free",
     realProject: {
       name: "Mobile App Features",
       description: "App feature showcase with icon illustrations",
@@ -493,7 +493,7 @@ export const freeTemplates: Template[] = [
     ],
     preview: "testimonial-grid",
     tags: ["free", "testimonials", "reviews", "social-proof"],
-    isPremium: false,
+    tier: "free",
     realProject: {
       name: "Customer Reviews",
       description: "E-commerce customer review section",
@@ -548,7 +548,7 @@ export const freeTemplates: Template[] = [
     ],
     preview: "comparison-table",
     tags: ["free", "comparison", "table", "features"],
-    isPremium: false,
+    tier: "free",
     realProject: {
       name: "Software Comparison",
       description: "Project management software comparison",
@@ -587,7 +587,7 @@ export const freeTemplates: Template[] = [
     ],
     preview: "faq-layout",
     tags: ["free", "faq", "support", "questions"],
-    isPremium: false,
+    tier: "free",
     realProject: {
       name: "Help Center",
       description: "Customer support FAQ page",
@@ -622,7 +622,7 @@ export const freeTemplates: Template[] = [
     ],
     preview: "contact-form",
     tags: ["free", "contact", "form", "business"],
-    isPremium: false,
+    tier: "free",
     realProject: {
       name: "Business Contact Page",
       description: "Professional contact page with form and details",
@@ -656,7 +656,7 @@ export const freeTemplates: Template[] = [
     ],
     preview: "about-page",
     tags: ["free", "about", "company", "mission"],
-    isPremium: false,
+    tier: "free",
     realProject: {
       name: "Company About Page",
       description: "Startup about page with mission and team",
@@ -689,7 +689,7 @@ export const freeTemplates: Template[] = [
     ],
     preview: "landing-page",
     tags: ["free", "landing", "hero", "conversion"],
-    isPremium: false,
+    tier: "free",
     realProject: {
       name: "Product Landing Page",
       description: "Simple product landing page with conversion focus",
@@ -729,7 +729,7 @@ export const freeTemplates: Template[] = [
     ],
     preview: "portfolio-grid",
     tags: ["free", "portfolio", "projects", "showcase"],
-    isPremium: false,
+    tier: "free",
     realProject: {
       name: "Design Portfolio",
       description: "Freelance designer portfolio with project showcase",
