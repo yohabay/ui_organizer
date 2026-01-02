@@ -20,6 +20,7 @@ export const realEstateTemplates: Template[] = [
     ],
     preview: "/template-previews/free-property-listing.jpg",
     tags: ["real-estate", "property", "listing", "housing"],
+    tier: "free",
   },
   {
     id: "premium-real-estate-luxury",
@@ -42,6 +43,7 @@ export const realEstateTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-real-estate-luxury.jpg",
     tags: ["luxury", "real-estate", "premium", "property"],
+    tier: "premium",
   },
 ];
 
