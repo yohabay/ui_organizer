@@ -67,6 +67,7 @@ export const healthcareTemplates: Template[] = [
     ],
     preview: "/template-previews/free-medical-appointment.jpg",
     tags: ["healthcare", "medical", "appointment", "doctor"],
+    tier: "free",
   },
   {
     id: "premium-telemedicine-platform",
@@ -91,6 +92,7 @@ export const healthcareTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-telemedicine-platform.jpg",
     tags: ["telemedicine", "healthcare", "premium", "medical"],
+    tier: "premium",
   },
 ];
 
@@ -115,6 +117,7 @@ export const entertainmentTemplates: Template[] = [
     ],
     preview: "/template-previews/free-streaming-platform.jpg",
     tags: ["streaming", "entertainment", "video", "media"],
+    tier: "free",
   },
   {
     id: "premium-media-production",
@@ -141,6 +144,7 @@ export const entertainmentTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-media-production.jpg",
     tags: ["production", "media", "professional", "premium"],
+    tier: "premium",
   },
 ];
 
@@ -165,6 +169,7 @@ export const automotiveTemplates: Template[] = [
     ],
     preview: "/template-previews/free-car-dealership.jpg",
     tags: ["automotive", "dealership", "cars", "transportation"],
+    tier: "free",
   },
   {
     id: "premium-fleet-management",
@@ -189,6 +194,7 @@ export const automotiveTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-fleet-management.jpg",
     tags: ["fleet", "management", "transportation", "premium"],
+    tier: "premium",
   },
 ];
 
@@ -212,6 +218,7 @@ export const fashionTemplates: Template[] = [
     ],
     preview: "/template-previews/free-fashion-store.jpg",
     tags: ["fashion", "retail", "clothing", "beauty"],
+    tier: "free",
   },
   {
     id: "premium-beauty-salon",
@@ -236,6 +243,7 @@ export const fashionTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-beauty-salon.jpg",
     tags: ["beauty", "salon", "luxury", "premium"],
+    tier: "premium",
   },
 ];
 
@@ -260,6 +268,7 @@ export const gamingTemplates: Template[] = [
     ],
     preview: "/template-previews/free-gaming-platform.jpg",
     tags: ["gaming", "platform", "esports", "games"],
+    tier: "free",
   },
   {
     id: "premium-esports-tournament",
@@ -284,6 +293,7 @@ export const gamingTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-esports-tournament.jpg",
     tags: ["esports", "tournament", "professional", "premium"],
+    tier: "premium",
   },
 ];
 
@@ -308,6 +318,7 @@ export const sportsTemplates: Template[] = [
     ],
     preview: "/template-previews/free-sports-league.jpg",
     tags: ["sports", "league", "teams", "fitness"],
+    tier: "free",
   },
   {
     id: "premium-sports-analytics",
@@ -331,6 +342,7 @@ export const sportsTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-sports-analytics.jpg",
     tags: ["sports", "analytics", "performance", "premium"],
+    tier: "premium",
   },
 ];
 
@@ -355,6 +367,7 @@ export const businessTemplates: Template[] = [
     ],
     preview: "/template-previews/free-consulting-firm.jpg",
     tags: ["consulting", "business", "professional", "services"],
+    tier: "free",
   },
   {
     id: "premium-enterprise-solutions",
@@ -379,6 +392,7 @@ export const businessTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-enterprise-solutions.jpg",
     tags: ["enterprise", "solutions", "business", "premium"],
+    tier: "premium",
   },
 ];
 
@@ -402,6 +416,7 @@ export const nonprofitTemplates: Template[] = [
     ],
     preview: "/template-previews/free-charity-platform.jpg",
     tags: ["charity", "non-profit", "donation", "cause"],
+    tier: "free",
   },
   {
     id: "premium-foundation-platform",
@@ -426,6 +441,7 @@ export const nonprofitTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-foundation-platform.jpg",
     tags: ["foundation", "non-profit", "grants", "premium"],
+    tier: "premium",
   },
 ];
 
@@ -450,6 +466,7 @@ export const governmentTemplates: Template[] = [
     ],
     preview: "/template-previews/free-government-portal.jpg",
     tags: ["government", "portal", "services", "public"],
+    tier: "free",
   },
   {
     id: "premium-civic-engagement",
@@ -474,6 +491,7 @@ export const governmentTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-civic-engagement.jpg",
     tags: ["civic", "engagement", "government", "premium"],
+    tier: "premium",
   },
 ];
 
