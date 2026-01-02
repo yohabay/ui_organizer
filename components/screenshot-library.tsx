@@ -83,7 +83,7 @@ export function ScreenshotLibrary({
 
   const categories = Array.from(
     new Set(screenshots.map((s) => s.category).filter(Boolean))
-  );
+  ) as string[];
 
   // Analyze screenshots for professional arrangement
   const analyzeScreenshots = async () => {
