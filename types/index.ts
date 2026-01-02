@@ -8,6 +8,8 @@ export interface Screenshot {
   category?: string;
   confidence?: number;
   uiElements?: string[];
+  tags?: string[];
+  uploadedAt: string;
 }
 
 export interface TemplateSlot {
