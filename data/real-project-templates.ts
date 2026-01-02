@@ -22,6 +22,7 @@ export const realProjectTemplates: Template[] = [
     ],
     preview: "premium-hero-dynamic",
     tags: ["premium", "hero", "dynamic", "adaptive"],
+    tier: "premium",
     isPremium: true,
   },
   {
@@ -49,6 +50,7 @@ export const realProjectTemplates: Template[] = [
     ],
     preview: "premium-masonry-adaptive",
     tags: ["premium", "masonry", "adaptive", "dynamic"],
+    tier: "premium",
     isPremium: true,
   },
 
@@ -84,6 +86,7 @@ export const realProjectTemplates: Template[] = [
     ],
     preview: "dynamic-grid-flexible",
     tags: ["dynamic", "grid", "flexible", "adaptive"],
+    tier: "free",
   },
 
   // Premium Creative Layouts
@@ -115,6 +118,7 @@ export const realProjectTemplates: Template[] = [
     ],
     preview: "premium-creative-collage",
     tags: ["premium", "creative", "collage", "artistic"],
+    tier: "premium",
     isPremium: true,
   },
 
@@ -139,6 +143,7 @@ export const realProjectTemplates: Template[] = [
     ],
     preview: "premium-business-presentation",
     tags: ["premium", "business", "corporate", "professional"],
+    tier: "premium",
     isPremium: true,
   },
 
@@ -167,6 +172,7 @@ export const realProjectTemplates: Template[] = [
     ],
     preview: "premium-mobile-storyboard",
     tags: ["premium", "mobile", "storyboard", "flow"],
+    tier: "premium",
     isPremium: true,
   },
 
@@ -203,6 +209,7 @@ export const realProjectTemplates: Template[] = [
     ],
     preview: "advanced-mosaic-dynamic",
     tags: ["advanced", "mosaic", "dynamic", "complex"],
+    tier: "free",
     isPremium: true,
   },
 
@@ -229,6 +236,7 @@ export const realProjectTemplates: Template[] = [
     ],
     preview: "premium-minimalist-focus",
     tags: ["premium", "minimalist", "focus", "clean"],
+    tier: "premium",
     isPremium: true,
   },
 
@@ -263,6 +271,7 @@ export const realProjectTemplates: Template[] = [
     ],
     preview: "premium-portfolio-showcase",
     tags: ["premium", "portfolio", "showcase", "professional"],
+    tier: "premium",
     isPremium: true,
   },
 
@@ -303,6 +312,7 @@ export const realProjectTemplates: Template[] = [
     ],
     preview: "premium-ecommerce-showcase",
     tags: ["premium", "ecommerce", "products", "shopping"],
+    tier: "premium",
     isPremium: true,
   },
 
@@ -345,6 +355,7 @@ export const realProjectTemplates: Template[] = [
     ],
     preview: "premium-saas-dashboard",
     tags: ["premium", "saas", "dashboard", "analytics"],
+    tier: "premium",
     isPremium: true,
   },
 
@@ -370,6 +381,7 @@ export const realProjectTemplates: Template[] = [
     ],
     preview: "premium-mobile-app-complete",
     tags: ["premium", "mobile", "app", "complete"],
+    tier: "premium",
     isPremium: true,
   },
 
@@ -405,6 +417,7 @@ export const realProjectTemplates: Template[] = [
     ],
     preview: "premium-creative-agency",
     tags: ["premium", "creative", "agency", "portfolio"],
+    tier: "premium",
     isPremium: true,
   },
 ];

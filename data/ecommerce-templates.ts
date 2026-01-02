@@ -20,6 +20,7 @@ export const ecommerceTemplates: Template[] = [
     ],
     preview: "/template-previews/free-ecommerce-basic.jpg",
     tags: ["ecommerce", "products", "grid", "shopping"],
+    tier: "free",
   },
   {
     id: "free-ecommerce-premium",
@@ -40,6 +41,7 @@ export const ecommerceTemplates: Template[] = [
     ],
     preview: "/template-previews/free-ecommerce-premium.jpg",
     tags: ["ecommerce", "premium", "featured", "modern"],
+    tier: "free",
   },
   {
     id: "free-marketplace-grid",
@@ -63,6 +65,7 @@ export const ecommerceTemplates: Template[] = [
     ],
     preview: "/template-previews/free-marketplace-grid.jpg",
     tags: ["marketplace", "vendors", "multi-seller", "grid"],
+    tier: "free",
   },
   {
     id: "free-product-catalog",
@@ -89,6 +92,7 @@ export const ecommerceTemplates: Template[] = [
     ],
     preview: "/template-previews/free-product-catalog.jpg",
     tags: ["catalog", "products", "categories", "comprehensive"],
+    tier: "free",
   },
   {
     id: "free-shopping-cart",
@@ -108,6 +112,7 @@ export const ecommerceTemplates: Template[] = [
     ],
     preview: "/template-previews/free-shopping-cart.jpg",
     tags: ["cart", "checkout", "payment", "flow"],
+    tier: "free",
   },
   {
     id: "premium-ecommerce-luxury",
@@ -130,6 +135,7 @@ export const ecommerceTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-ecommerce-luxury.jpg",
     tags: ["luxury", "premium", "high-end", "exclusive"],
+    tier: "premium",
   },
   {
     id: "premium-marketplace-advanced",
@@ -157,6 +163,7 @@ export const ecommerceTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-marketplace-advanced.jpg",
     tags: ["marketplace", "analytics", "advanced", "metrics"],
+    tier: "premium",
   },
   {
     id: "premium-product-showcase",
@@ -177,6 +184,7 @@ export const ecommerceTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-product-showcase.jpg",
     tags: ["showcase", "premium", "presentation", "gallery"],
+    tier: "premium",
   },
   {
     id: "mobile-ecommerce-app",
@@ -208,11 +216,13 @@ export const ecommerceTemplates: Template[] = [
     ],
     preview: "/template-previews/mobile-ecommerce-app.jpg",
     tags: ["mobile", "ecommerce", "app", "shopping", "ios", "android"],
+    tier: "free",
     realProject: {
       name: "Mobile Shopping App",
       description: "A comprehensive mobile e-commerce application featuring product browsing, detailed product views, and shopping cart functionality",
       platform: "iOS/Android",
       industry: "E-commerce"
-    }
+    },
+    tier: "free",
   },
 ];

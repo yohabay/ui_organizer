@@ -19,6 +19,7 @@ export const foodTemplates: Template[] = [
     ],
     preview: "/template-previews/free-restaurant-menu.jpg",
     tags: ["restaurant", "menu", "food", "dining"],
+    tier: "free",
   },
   {
     id: "free-food-delivery",
@@ -37,6 +38,7 @@ export const foodTemplates: Template[] = [
     ],
     preview: "/template-previews/free-food-delivery.jpg",
     tags: ["delivery", "food", "mobile", "app"],
+    tier: "free",
   },
   {
     id: "free-recipe-app",
@@ -57,6 +59,7 @@ export const foodTemplates: Template[] = [
     ],
     preview: "/template-previews/free-recipe-app.jpg",
     tags: ["recipe", "cooking", "food", "app"],
+    tier: "free",
   },
   {
     id: "free-restaurant-booking",
@@ -77,6 +80,7 @@ export const foodTemplates: Template[] = [
     ],
     preview: "/template-previews/free-restaurant-booking.jpg",
     tags: ["booking", "reservation", "restaurant", "dining"],
+    tier: "free",
   },
   {
     id: "free-food-blog",
@@ -99,6 +103,7 @@ export const foodTemplates: Template[] = [
     ],
     preview: "/template-previews/free-food-blog.jpg",
     tags: ["blog", "food", "recipes", "sharing"],
+    tier: "free",
   },
   {
     id: "premium-restaurant-luxury",
@@ -121,6 +126,7 @@ export const foodTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-restaurant-luxury.jpg",
     tags: ["luxury", "restaurant", "fine-dining", "premium"],
+    tier: "premium",
   },
   {
     id: "premium-food-delivery-advanced",
@@ -147,6 +153,7 @@ export const foodTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-food-delivery-advanced.jpg",
     tags: ["delivery", "advanced", "platform", "premium"],
+    tier: "premium",
   },
   {
     id: "premium-culinary-platform",
@@ -171,5 +178,6 @@ export const foodTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-culinary-platform.jpg",
     tags: ["culinary", "platform", "experience", "premium"],
+    tier: "premium",
   },
 ];

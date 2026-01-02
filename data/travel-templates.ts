@@ -20,6 +20,7 @@ export const travelTemplates: Template[] = [
     ],
     preview: "/template-previews/free-travel-booking.jpg",
     tags: ["travel", "booking", "reservation", "tourism"],
+    tier: "free",
   },
   {
     id: "free-hotel-booking",
@@ -39,6 +40,7 @@ export const travelTemplates: Template[] = [
     ],
     preview: "/template-previews/free-hotel-booking.jpg",
     tags: ["hotel", "booking", "accommodation", "travel"],
+    tier: "free",
   },
   {
     id: "free-travel-guide",
@@ -61,6 +63,7 @@ export const travelTemplates: Template[] = [
     ],
     preview: "/template-previews/free-travel-guide.jpg",
     tags: ["guide", "destination", "travel", "tourism"],
+    tier: "free",
   },
   {
     id: "free-flight-search",
@@ -80,6 +83,7 @@ export const travelTemplates: Template[] = [
     ],
     preview: "/template-previews/free-flight-search.jpg",
     tags: ["flight", "search", "booking", "travel"],
+    tier: "free",
   },
   {
     id: "free-travel-app",
@@ -99,6 +103,7 @@ export const travelTemplates: Template[] = [
     ],
     preview: "/template-previews/free-travel-app.jpg",
     tags: ["travel", "mobile", "app", "tourism"],
+    tier: "free",
   },
   {
     id: "premium-travel-luxury",
@@ -121,6 +126,7 @@ export const travelTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-travel-luxury.jpg",
     tags: ["luxury", "travel", "exclusive", "premium"],
+    tier: "premium",
   },
   {
     id: "premium-travel-agency",
@@ -148,6 +154,7 @@ export const travelTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-travel-agency.jpg",
     tags: ["agency", "professional", "travel", "premium"],
+    tier: "premium",
   },
   {
     id: "premium-travel-analytics",
@@ -171,5 +178,6 @@ export const travelTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-travel-analytics.jpg",
     tags: ["analytics", "travel", "insights", "premium"],
+    tier: "premium",
   },
 ];

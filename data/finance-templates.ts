@@ -18,6 +18,7 @@ export const financeTemplates: Template[] = [
     ],
     preview: "/template-previews/free-banking-app.jpg",
     tags: ["banking", "finance", "mobile", "app"],
+    tier: "free",
   },
   {
     id: "free-investment-platform",
@@ -38,6 +39,7 @@ export const financeTemplates: Template[] = [
     ],
     preview: "/template-previews/free-investment-platform.jpg",
     tags: ["investment", "trading", "finance", "platform"],
+    tier: "free",
   },
   {
     id: "free-payment-gateway",
@@ -55,6 +57,7 @@ export const financeTemplates: Template[] = [
     ],
     preview: "/template-previews/free-payment-gateway.jpg",
     tags: ["payment", "gateway", "finance", "processing"],
+    tier: "free",
   },
   {
     id: "free-insurance-platform",
@@ -75,6 +78,7 @@ export const financeTemplates: Template[] = [
     ],
     preview: "/template-previews/free-insurance-platform.jpg",
     tags: ["insurance", "quotes", "finance", "platform"],
+    tier: "free",
   },
   {
     id: "free-cryptocurrency",
@@ -95,6 +99,7 @@ export const financeTemplates: Template[] = [
     ],
     preview: "/template-previews/free-cryptocurrency.jpg",
     tags: ["cryptocurrency", "trading", "finance", "crypto"],
+    tier: "free",
   },
   {
     id: "premium-wealth-management",
@@ -119,6 +124,7 @@ export const financeTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-wealth-management.jpg",
     tags: ["wealth", "management", "premium", "finance"],
+    tier: "premium",
   },
   {
     id: "premium-trading-advanced",
@@ -145,6 +151,7 @@ export const financeTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-trading-advanced.jpg",
     tags: ["trading", "advanced", "analytics", "premium"],
+    tier: "premium",
   },
   {
     id: "premium-financial-analytics",
@@ -168,5 +175,6 @@ export const financeTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-financial-analytics.jpg",
     tags: ["analytics", "financial", "insights", "premium"],
+    tier: "premium",
   },
 ];

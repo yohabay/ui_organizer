@@ -20,6 +20,7 @@ export const educationTemplates: Template[] = [
     ],
     preview: "/template-previews/free-course-catalog.jpg",
     tags: ["education", "courses", "catalog", "learning"],
+    tier: "free",
   },
   {
     id: "free-learning-dashboard",
@@ -40,6 +41,7 @@ export const educationTemplates: Template[] = [
     ],
     preview: "/template-previews/free-learning-dashboard.jpg",
     tags: ["dashboard", "student", "progress", "education"],
+    tier: "free",
   },
   {
     id: "free-student-portal",
@@ -61,6 +63,7 @@ export const educationTemplates: Template[] = [
     ],
     preview: "/template-previews/free-student-portal.jpg",
     tags: ["portal", "student", "interface", "education"],
+    tier: "free",
   },
   {
     id: "free-quiz-platform",
@@ -80,6 +83,7 @@ export const educationTemplates: Template[] = [
     ],
     preview: "/template-previews/free-quiz-platform.jpg",
     tags: ["quiz", "assessment", "interactive", "education"],
+    tier: "free",
   },
   {
     id: "free-education-app",
@@ -100,6 +104,7 @@ export const educationTemplates: Template[] = [
     ],
     preview: "/template-previews/free-education-app.jpg",
     tags: ["education", "mobile", "app", "learning"],
+    tier: "free",
   },
   {
     id: "premium-learning-platform",
@@ -124,6 +129,7 @@ export const educationTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-learning-platform.jpg",
     tags: ["platform", "advanced", "management", "premium"],
+    tier: "premium",
   },
   {
     id: "premium-course-advanced",
@@ -148,6 +154,7 @@ export const educationTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-course-advanced.jpg",
     tags: ["advanced", "course", "creation", "premium"],
+    tier: "premium",
   },
   {
     id: "premium-education-analytics",
@@ -171,5 +178,6 @@ export const educationTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-education-analytics.jpg",
     tags: ["analytics", "education", "insights", "premium"],
+    tier: "premium",
   },
 ];

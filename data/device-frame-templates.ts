@@ -24,6 +24,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "iphone-single",
     tags: ["iphone", "mobile", "single", "device-frame"],
+    tier: "free",
     tier: "premium",
   },
   {
@@ -58,6 +59,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "iphone-duo",
     tags: ["iphone", "mobile", "duo", "device-frame"],
+    tier: "free",
     tier: "premium",
   },
   {
@@ -102,6 +104,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "iphone-trio",
     tags: ["iphone", "mobile", "trio", "device-frame"],
+    tier: "free",
     tier: "premium",
   },
 
@@ -128,6 +131,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "android-single",
     tags: ["android", "mobile", "single", "device-frame"],
+    tier: "free",
     tier: "premium",
   },
   {
@@ -162,6 +166,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "android-duo",
     tags: ["android", "mobile", "duo", "device-frame"],
+    tier: "free",
     tier: "premium",
   },
 
@@ -188,6 +193,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "tablet-single",
     tags: ["tablet", "mobile", "single", "device-frame"],
+    tier: "free",
     tier: "premium",
   },
   {
@@ -222,6 +228,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "tablet-duo",
     tags: ["tablet", "mobile", "duo", "device-frame"],
+    tier: "free",
     tier: "premium",
   },
 
@@ -248,6 +255,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "browser-single",
     tags: ["browser", "website", "single", "device-frame"],
+    tier: "free",
     tier: "premium",
   },
   {
@@ -282,6 +290,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "browser-duo",
     tags: ["browser", "website", "duo", "device-frame"],
+    tier: "free",
     tier: "premium",
   },
 
@@ -318,6 +327,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "mobile-web-combo",
     tags: ["iphone", "browser", "combo", "device-frame"],
+    tier: "free",
     tier: "premium",
   },
   {
@@ -352,6 +362,7 @@ export const deviceFrameTemplates: Template[] = [
     ],
     preview: "tablet-phone-combo",
     tags: ["tablet", "iphone", "combo", "device-frame"],
+    tier: "free",
     tier: "premium",
   },
 

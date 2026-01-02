@@ -18,6 +18,7 @@ export const socialMediaTemplates: Template[] = [
     ],
     preview: "/template-previews/free-social-feed.jpg",
     tags: ["social", "feed", "posts", "community"],
+    tier: "free",
   },
   {
     id: "free-community-forum",
@@ -38,6 +39,7 @@ export const socialMediaTemplates: Template[] = [
     ],
     preview: "/template-previews/free-community-forum.jpg",
     tags: ["forum", "community", "discussion", "topics"],
+    tier: "free",
   },
   {
     id: "free-chat-platform",
@@ -55,6 +57,7 @@ export const socialMediaTemplates: Template[] = [
     ],
     preview: "/template-previews/free-chat-platform.jpg",
     tags: ["chat", "messaging", "conversation", "real-time"],
+    tier: "free",
   },
   {
     id: "free-user-profiles",
@@ -75,6 +78,7 @@ export const socialMediaTemplates: Template[] = [
     ],
     preview: "/template-previews/free-user-profiles.jpg",
     tags: ["profile", "user", "bio", "personal"],
+    tier: "free",
   },
   {
     id: "free-social-dashboard",
@@ -95,6 +99,7 @@ export const socialMediaTemplates: Template[] = [
     ],
     preview: "/template-previews/free-social-dashboard.jpg",
     tags: ["dashboard", "analytics", "management", "social"],
+    tier: "free",
   },
   {
     id: "premium-social-network",
@@ -114,6 +119,7 @@ export const socialMediaTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-social-network.jpg",
     tags: ["network", "premium", "advanced", "social"],
+    tier: "premium",
   },
   {
     id: "premium-community-advanced",
@@ -136,6 +142,7 @@ export const socialMediaTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-community-advanced.jpg",
     tags: ["community", "advanced", "features", "groups"],
+    tier: "premium",
   },
   {
     id: "premium-social-analytics",
@@ -159,5 +166,6 @@ export const socialMediaTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-social-analytics.jpg",
     tags: ["analytics", "premium", "insights", "performance"],
+    tier: "premium",
   },
 ];

@@ -18,6 +18,7 @@ export const fitnessTemplates: Template[] = [
     ],
     preview: "/template-previews/free-fitness-tracker.jpg",
     tags: ["fitness", "tracking", "health", "mobile"],
+    tier: "free",
   },
   {
     id: "free-workout-planner",
@@ -39,6 +40,7 @@ export const fitnessTemplates: Template[] = [
     ],
     preview: "/template-previews/free-workout-planner.jpg",
     tags: ["workout", "planning", "exercises", "scheduling"],
+    tier: "free",
   },
   {
     id: "free-health-dashboard",
@@ -61,6 +63,7 @@ export const fitnessTemplates: Template[] = [
     ],
     preview: "/template-previews/free-health-dashboard.jpg",
     tags: ["health", "dashboard", "monitoring", "metrics"],
+    tier: "free",
   },
   {
     id: "free-nutrition-tracker",
@@ -82,6 +85,7 @@ export const fitnessTemplates: Template[] = [
     ],
     preview: "/template-previews/free-nutrition-tracker.jpg",
     tags: ["nutrition", "food", "tracking", "diet"],
+    tier: "free",
   },
   {
     id: "free-wellness-app",
@@ -103,6 +107,7 @@ export const fitnessTemplates: Template[] = [
     ],
     preview: "/template-previews/free-wellness-app.jpg",
     tags: ["wellness", "mindfulness", "meditation", "holistic"],
+    tier: "free",
   },
   {
     id: "premium-fitness-advanced",
@@ -125,6 +130,7 @@ export const fitnessTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-fitness-advanced.jpg",
     tags: ["advanced", "AI", "performance", "premium"],
+    tier: "premium",
   },
   {
     id: "premium-health-analytics",
@@ -149,6 +155,7 @@ export const fitnessTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-health-analytics.jpg",
     tags: ["analytics", "health", "medical", "premium"],
+    tier: "premium",
   },
   {
     id: "premium-wellness-platform",
@@ -173,5 +180,6 @@ export const fitnessTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-wellness-platform.jpg",
     tags: ["wellness", "platform", "ecosystem", "premium"],
+    tier: "premium",
   },
 ];

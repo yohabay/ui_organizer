@@ -20,6 +20,7 @@ export const technologyTemplates: Template[] = [
     ],
     preview: "/template-previews/free-saas-dashboard.jpg",
     tags: ["saas", "dashboard", "software", "technology"],
+    tier: "free",
   },
   {
     id: "free-mobile-app",
@@ -38,6 +39,7 @@ export const technologyTemplates: Template[] = [
     ],
     preview: "/template-previews/free-mobile-app.jpg",
     tags: ["mobile", "app", "interface", "technology"],
+    tier: "free",
   },
   {
     id: "free-web-app",
@@ -55,6 +57,7 @@ export const technologyTemplates: Template[] = [
     ],
     preview: "/template-previews/free-web-app.jpg",
     tags: ["web", "application", "interface", "technology"],
+    tier: "free",
   },
   {
     id: "free-api-docs",
@@ -72,6 +75,7 @@ export const technologyTemplates: Template[] = [
     ],
     preview: "/template-previews/free-api-docs.jpg",
     tags: ["api", "documentation", "developer", "technology"],
+    tier: "free",
   },
   {
     id: "free-developer-portal",
@@ -96,6 +100,7 @@ export const technologyTemplates: Template[] = [
     ],
     preview: "/template-previews/free-developer-portal.jpg",
     tags: ["developer", "portal", "resources", "technology"],
+    tier: "free",
   },
   {
     id: "premium-enterprise-software",
@@ -123,6 +128,7 @@ export const technologyTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-enterprise-software.jpg",
     tags: ["enterprise", "software", "platform", "premium"],
+    tier: "premium",
   },
   {
     id: "premium-ai-platform",
@@ -147,6 +153,7 @@ export const technologyTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-ai-platform.jpg",
     tags: ["ai", "platform", "machine-learning", "premium"],
+    tier: "premium",
   },
   {
     id: "premium-cloud-platform",
@@ -176,5 +183,6 @@ export const technologyTemplates: Template[] = [
     ],
     preview: "/template-previews/premium-cloud-platform.jpg",
     tags: ["cloud", "platform", "computing", "premium"],
+    tier: "premium",
   },
 ];
