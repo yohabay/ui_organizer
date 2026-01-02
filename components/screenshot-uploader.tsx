@@ -2,12 +2,12 @@
 
 import type React from "react"
 
-import { useCallback, useState } from "react"
-import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Upload, X, ImageIcon } from "lucide-react"
+import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 import type { ProjectType, Screenshot } from "@/types"
+import { ImageIcon, Upload, X } from "lucide-react"
+import { useCallback, useState } from "react"
 
 interface ScreenshotUploaderProps {
   onScreenshotsUploaded: (screenshots: Screenshot[]) => void
@@ -50,6 +50,7 @@ export function ScreenshotUploader({ onScreenshotsUploaded, projectType }: Scree
       name: file.name,
       file,
       url: URL.createObjectURL(file),
+      uploadedAt: new Date().toISOString(),
     }))
 
     setUploadedFiles((prev) => [...prev, ...newScreenshots])
