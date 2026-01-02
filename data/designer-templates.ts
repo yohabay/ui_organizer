@@ -21,7 +21,6 @@ export const designerTemplates: Template[] = [
     preview: "floating-hero",
     tags: ["hero", "floating", "depth", "modern"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -44,7 +43,6 @@ export const designerTemplates: Template[] = [
     preview: "diagonal-cascade",
     tags: ["diagonal", "cascade", "dynamic", "flow"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -70,7 +68,6 @@ export const designerTemplates: Template[] = [
     preview: "circular-spotlight",
     tags: ["circular", "spotlight", "radial", "center-focus"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -93,7 +90,6 @@ export const designerTemplates: Template[] = [
     preview: "asymmetric-hero",
     tags: ["asymmetric", "bold", "overlapping", "modern"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -122,7 +118,6 @@ export const designerTemplates: Template[] = [
     preview: "staggered-gallery",
     tags: ["staggered", "masonry", "pinterest", "varied-heights"],
     tier: "free",
-    tier: "premium",
   },
 
   // CREATIVE MOBILE DESIGNS
@@ -171,7 +166,6 @@ export const designerTemplates: Template[] = [
     preview: "phone-stack-3d",
     tags: ["mobile", "3d", "stack", "perspective", "mockup"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -194,7 +188,6 @@ export const designerTemplates: Template[] = [
     preview: "mobile-journey",
     tags: ["mobile", "journey", "flow", "connected", "ux"],
     tier: "free",
-    tier: "premium",
   },
 
   // DESKTOP & WEB DESIGNS
@@ -242,7 +235,6 @@ export const designerTemplates: Template[] = [
     preview: "browser-stack",
     tags: ["browser", "stack", "web", "layered", "depth"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -273,7 +265,6 @@ export const designerTemplates: Template[] = [
     preview: "dashboard-spotlight",
     tags: ["dashboard", "spotlight", "widgets", "enterprise"],
     tier: "free",
-    tier: "premium",
   },
 
   // CREATIVE ARTISTIC DESIGNS
@@ -337,7 +328,6 @@ export const designerTemplates: Template[] = [
     preview: "polaroid-scatter",
     tags: ["polaroid", "artistic", "scattered", "vintage", "creative"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -361,7 +351,6 @@ export const designerTemplates: Template[] = [
     preview: "magazine-spread",
     tags: ["magazine", "editorial", "text-blocks", "professional"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -385,7 +374,6 @@ export const designerTemplates: Template[] = [
     preview: "geometric-hexagon",
     tags: ["geometric", "hexagon", "modern", "pattern"],
     tier: "free",
-    tier: "premium",
   },
 
   // INNOVATIVE LAYOUTS
@@ -413,7 +401,6 @@ export const designerTemplates: Template[] = [
     preview: "spiral-galaxy",
     tags: ["spiral", "galaxy", "dynamic", "flow", "creative"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -479,7 +466,6 @@ export const designerTemplates: Template[] = [
     preview: "layered-cards",
     tags: ["cards", "layered", "depth", "shadows", "realistic"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -508,7 +494,6 @@ export const designerTemplates: Template[] = [
     preview: "infinity-loop",
     tags: ["infinity", "loop", "symbol", "flowing", "creative"],
     tier: "free",
-    tier: "premium",
   },
 
   // MODERN PORTFOLIO STYLES
@@ -607,7 +592,6 @@ export const designerTemplates: Template[] = [
     preview: "dribbble-showcase",
     tags: ["dribbble", "portfolio", "modern", "hover-effects", "grid"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -632,7 +616,6 @@ export const designerTemplates: Template[] = [
     preview: "behance-hero",
     tags: ["behance", "hero", "project", "professional", "detailed"],
     tier: "free",
-    tier: "premium",
   },
 
   // EXPERIMENTAL DESIGNS
@@ -705,7 +688,6 @@ export const designerTemplates: Template[] = [
     preview: "liquid-flow",
     tags: ["liquid", "organic", "flowing", "curved", "experimental"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -737,7 +719,6 @@ export const designerTemplates: Template[] = [
     preview: "neon-grid",
     tags: ["neon", "cyberpunk", "futuristic", "glow", "tech"],
     tier: "free",
-    tier: "premium",
   },
 
   // MINIMALIST MODERN
@@ -765,7 +746,6 @@ export const designerTemplates: Template[] = [
     preview: "swiss-minimal",
     tags: ["swiss", "minimal", "typography", "clean", "professional"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -863,7 +843,6 @@ export const designerTemplates: Template[] = [
     preview: "brutalist-blocks",
     tags: ["brutalist", "bold", "geometric", "contrast", "stark"],
     tier: "free",
-    tier: "premium",
   },
 
   // INTERACTIVE & DYNAMIC
@@ -887,7 +866,6 @@ export const designerTemplates: Template[] = [
     preview: "parallax-layers",
     tags: ["parallax", "layers", "interactive", "depth", "scrolling"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -952,7 +930,6 @@ export const designerTemplates: Template[] = [
     preview: "morphing-shapes",
     tags: ["morphing", "animated", "shapes", "dynamic", "organic"],
     tier: "free",
-    tier: "premium",
   },
 
   // Add 30 more templates to reach 50+...
@@ -1033,7 +1010,6 @@ export const designerTemplates: Template[] = [
     preview: "vintage-collage",
     tags: ["vintage", "collage", "torn", "nostalgic", "scrapbook"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -1104,7 +1080,6 @@ export const designerTemplates: Template[] = [
     preview: "holographic-display",
     tags: ["holographic", "sci-fi", "futuristic", "transparent", "glow"],
     tier: "free",
-    tier: "premium",
   },
 
   // Continue with more creative templates...
@@ -1176,7 +1151,6 @@ export const designerTemplates: Template[] = [
     preview: "origami-fold",
     tags: ["origami", "paper", "fold", "geometric", "shadow"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -1201,7 +1175,6 @@ export const designerTemplates: Template[] = [
     preview: "constellation-map",
     tags: ["constellation", "stars", "celestial", "connected", "space"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -1227,7 +1200,6 @@ export const designerTemplates: Template[] = [
     preview: "kaleidoscope-pattern",
     tags: ["kaleidoscope", "symmetrical", "mirrored", "pattern", "rotated"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -1253,7 +1225,6 @@ export const designerTemplates: Template[] = [
     preview: "comic-book-panels",
     tags: ["comic", "panels", "speech-bubbles", "action", "dynamic"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -1290,7 +1261,7 @@ export const designerTemplates: Template[] = [
       "measurements",
       "precise",
     ],
-    tier: "premium",
+
   },
 
   // Continue adding more templates to reach 50+...
@@ -1364,7 +1335,6 @@ export const designerTemplates: Template[] = [
     preview: "watercolor-splash",
     tags: ["watercolor", "artistic", "splash", "organic", "paint"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -1387,7 +1357,6 @@ export const designerTemplates: Template[] = [
     preview: "isometric-cube",
     tags: ["isometric", "3d", "cube", "perspective", "depth"],
     tier: "free",
-    tier: "premium",
   },
 
   {
@@ -1458,6 +1427,5 @@ export const designerTemplates: Template[] = [
     preview: "music-vinyl-records",
     tags: ["vinyl", "music", "records", "circular", "vintage"],
     tier: "free",
-    tier: "premium",
   },
 ];

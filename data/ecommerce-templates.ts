@@ -223,6 +223,5 @@ export const ecommerceTemplates: Template[] = [
       platform: "iOS/Android",
       industry: "E-commerce"
     },
-    tier: "free",
   },
 ];

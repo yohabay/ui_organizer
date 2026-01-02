@@ -26,8 +26,6 @@ export const mobileTemplates: Template[] = [
     preview: "mobile-app-showcase",
     tags: ["mobile", "app", "screens", "device-frames"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "mobile-ui-kit",
@@ -51,8 +49,6 @@ export const mobileTemplates: Template[] = [
     preview: "mobile-ui-kit",
     tags: ["mobile", "ui", "components", "screens"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "mobile-feature-showcase",
@@ -76,8 +72,6 @@ export const mobileTemplates: Template[] = [
     preview: "mobile-feature-showcase",
     tags: ["mobile", "features", "showcase", "mockups"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "mobile-social-app",
@@ -98,8 +92,6 @@ export const mobileTemplates: Template[] = [
     preview: "mobile-social-app",
     tags: ["mobile", "social", "media", "feed"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "mobile-ecommerce",
@@ -120,8 +112,6 @@ export const mobileTemplates: Template[] = [
     preview: "mobile-ecommerce",
     tags: ["mobile", "ecommerce", "shopping", "products"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "mobile-fitness",
@@ -144,8 +134,6 @@ export const mobileTemplates: Template[] = [
     preview: "mobile-fitness",
     tags: ["mobile", "fitness", "workout", "tracking"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "mobile-music",
@@ -166,8 +154,6 @@ export const mobileTemplates: Template[] = [
     preview: "mobile-music",
     tags: ["mobile", "music", "streaming", "playlist"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "mobile-weather",
@@ -188,8 +174,6 @@ export const mobileTemplates: Template[] = [
     preview: "mobile-weather",
     tags: ["mobile", "weather", "forecast", "details"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "mobile-news",
@@ -209,8 +193,6 @@ export const mobileTemplates: Template[] = [
     preview: "mobile-news",
     tags: ["mobile", "news", "reading", "articles"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "mobile-gaming",
@@ -231,8 +213,6 @@ export const mobileTemplates: Template[] = [
     preview: "mobile-gaming",
     tags: ["mobile", "gaming", "controls", "interface"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "mobile-education",
@@ -255,8 +235,6 @@ export const mobileTemplates: Template[] = [
     preview: "mobile-education",
     tags: ["mobile", "education", "learning", "courses"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "mobile-travel",
@@ -277,8 +255,6 @@ export const mobileTemplates: Template[] = [
     preview: "mobile-travel",
     tags: ["mobile", "travel", "booking", "planning"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "mobile-health",
@@ -301,8 +277,6 @@ export const mobileTemplates: Template[] = [
     preview: "mobile-health",
     tags: ["mobile", "health", "monitoring", "tracking"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "mobile-productivity",
@@ -322,8 +296,6 @@ export const mobileTemplates: Template[] = [
     preview: "mobile-productivity",
     tags: ["mobile", "productivity", "tasks", "organization"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "mobile-finance",
@@ -344,8 +316,6 @@ export const mobileTemplates: Template[] = [
     preview: "mobile-finance",
     tags: ["mobile", "finance", "banking", "payments"],
     tier: "free",
-    tier: "premium",
-
   },
 ];
 
@@ -371,8 +341,6 @@ export const desktopTemplates: Template[] = [
     preview: "desktop-dashboard",
     tags: ["desktop", "dashboard", "professional", "widgets"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "desktop-application",
@@ -394,8 +362,6 @@ export const desktopTemplates: Template[] = [
     preview: "desktop-application",
     tags: ["desktop", "application", "interface", "layout"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "desktop-toolbar",
@@ -417,8 +383,6 @@ export const desktopTemplates: Template[] = [
     preview: "desktop-toolbar",
     tags: ["desktop", "toolbar", "software", "tools"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "desktop-video-editor",
@@ -438,8 +402,6 @@ export const desktopTemplates: Template[] = [
     preview: "desktop-video-editor",
     tags: ["desktop", "video", "editing", "professional"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "desktop-photo-editor",
@@ -460,8 +422,6 @@ export const desktopTemplates: Template[] = [
     preview: "desktop-photo-editor",
     tags: ["desktop", "photo", "editing", "design"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "desktop-music-studio",
@@ -482,8 +442,6 @@ export const desktopTemplates: Template[] = [
     preview: "desktop-music-studio",
     tags: ["desktop", "music", "studio", "audio"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "desktop-3d-modeler",
@@ -504,8 +462,6 @@ export const desktopTemplates: Template[] = [
     preview: "desktop-3d-modeler",
     tags: ["desktop", "3d", "modeling", "animation"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "desktop-code-editor",
@@ -525,8 +481,6 @@ export const desktopTemplates: Template[] = [
     preview: "desktop-code-editor",
     tags: ["desktop", "code", "editor", "development"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "desktop-cad",
@@ -546,8 +500,6 @@ export const desktopTemplates: Template[] = [
     preview: "desktop-cad",
     tags: ["desktop", "cad", "design", "engineering"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "desktop-spreadsheet",
@@ -567,8 +519,6 @@ export const desktopTemplates: Template[] = [
     preview: "desktop-spreadsheet",
     tags: ["desktop", "spreadsheet", "data", "analysis"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "desktop-presentation",
@@ -589,8 +539,6 @@ export const desktopTemplates: Template[] = [
     preview: "desktop-presentation",
     tags: ["desktop", "presentation", "slides", "design"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "desktop-database",
@@ -610,8 +558,6 @@ export const desktopTemplates: Template[] = [
     preview: "desktop-database",
     tags: ["desktop", "database", "sql", "management"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "desktop-project-manager",
@@ -631,8 +577,6 @@ export const desktopTemplates: Template[] = [
     preview: "desktop-project-manager",
     tags: ["desktop", "project", "management", "tasks"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "desktop-accounting",
@@ -652,8 +596,6 @@ export const desktopTemplates: Template[] = [
     preview: "desktop-accounting",
     tags: ["desktop", "accounting", "financial", "business"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "desktop-email-client",
@@ -673,8 +615,6 @@ export const desktopTemplates: Template[] = [
     preview: "desktop-email-client",
     tags: ["desktop", "email", "communication", "management"],
     tier: "free",
-    tier: "premium",
-
   },
 ];
 
@@ -698,8 +638,6 @@ export const websiteTemplates: Template[] = [
     preview: "website-landing",
     tags: ["website", "landing", "hero", "modern"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "website-portfolio",
@@ -722,8 +660,6 @@ export const websiteTemplates: Template[] = [
     preview: "website-portfolio",
     tags: ["website", "portfolio", "professional", "projects"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "website-ecommerce",
@@ -749,8 +685,6 @@ export const websiteTemplates: Template[] = [
     preview: "website-ecommerce",
     tags: ["website", "ecommerce", "products", "shop"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "website-blog",
@@ -770,8 +704,6 @@ export const websiteTemplates: Template[] = [
     preview: "website-blog",
     tags: ["website", "blog", "articles", "content"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "website-corporate",
@@ -792,8 +724,6 @@ export const websiteTemplates: Template[] = [
     preview: "website-corporate",
     tags: ["website", "corporate", "business", "services"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "website-agency",
@@ -813,8 +743,6 @@ export const websiteTemplates: Template[] = [
     preview: "website-agency",
     tags: ["website", "agency", "creative", "portfolio"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "website-restaurant",
@@ -834,8 +762,6 @@ export const websiteTemplates: Template[] = [
     preview: "website-restaurant",
     tags: ["website", "restaurant", "menu", "booking"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "website-hotel",
@@ -855,8 +781,6 @@ export const websiteTemplates: Template[] = [
     preview: "website-hotel",
     tags: ["website", "hotel", "rooms", "booking"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "website-education",
@@ -876,8 +800,6 @@ export const websiteTemplates: Template[] = [
     preview: "website-education",
     tags: ["website", "education", "courses", "learning"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "website-healthcare",
@@ -897,8 +819,6 @@ export const websiteTemplates: Template[] = [
     preview: "website-healthcare",
     tags: ["website", "healthcare", "medical", "services"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "website-law",
@@ -918,8 +838,6 @@ export const websiteTemplates: Template[] = [
     preview: "website-law",
     tags: ["website", "law", "legal", "services"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "website-real-estate",
@@ -939,8 +857,6 @@ export const websiteTemplates: Template[] = [
     preview: "website-real-estate",
     tags: ["website", "real-estate", "properties", "listings"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "website-fitness",
@@ -960,8 +876,6 @@ export const websiteTemplates: Template[] = [
     preview: "website-fitness",
     tags: ["website", "fitness", "gym", "classes"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "website-consulting",
@@ -981,8 +895,6 @@ export const websiteTemplates: Template[] = [
     preview: "website-consulting",
     tags: ["website", "consulting", "business", "services"],
     tier: "free",
-    tier: "premium",
-
   },
 ];
 
@@ -1007,8 +919,6 @@ export const tabletTemplates: Template[] = [
     preview: "tablet-app",
     tags: ["tablet", "app", "touch", "interface"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "tablet-dashboard",
@@ -1031,8 +941,6 @@ export const tabletTemplates: Template[] = [
     preview: "tablet-dashboard",
     tags: ["tablet", "dashboard", "widgets", "touch"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "tablet-gallery",
@@ -1053,8 +961,6 @@ export const tabletTemplates: Template[] = [
     preview: "tablet-gallery",
     tags: ["tablet", "gallery", "photos", "touch"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "tablet-reading",
@@ -1073,8 +979,6 @@ export const tabletTemplates: Template[] = [
     preview: "tablet-reading",
     tags: ["tablet", "reading", "e-reader", "content"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "tablet-video",
@@ -1095,8 +999,6 @@ export const tabletTemplates: Template[] = [
     preview: "tablet-video",
     tags: ["tablet", "video", "streaming", "player"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "tablet-music",
@@ -1116,8 +1018,6 @@ export const tabletTemplates: Template[] = [
     preview: "tablet-music",
     tags: ["tablet", "music", "streaming", "player"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "tablet-gaming",
@@ -1138,8 +1038,6 @@ export const tabletTemplates: Template[] = [
     preview: "tablet-gaming",
     tags: ["tablet", "gaming", "touch", "controls"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "tablet-social",
@@ -1159,8 +1057,6 @@ export const tabletTemplates: Template[] = [
     preview: "tablet-social",
     tags: ["tablet", "social", "media", "feed"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "tablet-education",
@@ -1183,8 +1079,6 @@ export const tabletTemplates: Template[] = [
     preview: "tablet-education",
     tags: ["tablet", "education", "learning", "modules"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "tablet-productivity",
@@ -1204,8 +1098,6 @@ export const tabletTemplates: Template[] = [
     preview: "tablet-productivity",
     tags: ["tablet", "productivity", "work", "tools"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "tablet-shopping",
@@ -1226,8 +1118,6 @@ export const tabletTemplates: Template[] = [
     preview: "tablet-shopping",
     tags: ["tablet", "shopping", "ecommerce", "products"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "tablet-health",
@@ -1250,8 +1140,6 @@ export const tabletTemplates: Template[] = [
     preview: "tablet-health",
     tags: ["tablet", "health", "monitoring", "fitness"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "tablet-news",
@@ -1271,8 +1159,6 @@ export const tabletTemplates: Template[] = [
     preview: "tablet-news",
     tags: ["tablet", "news", "reading", "articles"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "tablet-weather",
@@ -1293,8 +1179,6 @@ export const tabletTemplates: Template[] = [
     preview: "tablet-weather",
     tags: ["tablet", "weather", "forecast", "details"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "tablet-travel",
@@ -1314,8 +1198,6 @@ export const tabletTemplates: Template[] = [
     preview: "tablet-travel",
     tags: ["tablet", "travel", "planning", "booking"],
     tier: "free",
-    tier: "premium",
-
   },
 ];
 
@@ -1338,8 +1220,6 @@ export const chromeTemplates: Template[] = [
     preview: "chrome-extension",
     tags: ["chrome", "extension", "popup", "browser"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "chrome-dashboard",
@@ -1360,8 +1240,6 @@ export const chromeTemplates: Template[] = [
     preview: "chrome-dashboard",
     tags: ["chrome", "dashboard", "extension", "interface"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "chrome-ad-blocker",
@@ -1380,8 +1258,6 @@ export const chromeTemplates: Template[] = [
     preview: "chrome-ad-blocker",
     tags: ["chrome", "ad-blocker", "privacy", "security"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "chrome-password-manager",
@@ -1401,8 +1277,6 @@ export const chromeTemplates: Template[] = [
     preview: "chrome-password-manager",
     tags: ["chrome", "password", "security", "management"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "chrome-translator",
@@ -1421,8 +1295,6 @@ export const chromeTemplates: Template[] = [
     preview: "chrome-translator",
     tags: ["chrome", "translation", "language", "communication"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "chrome-screenshot",
@@ -1441,8 +1313,6 @@ export const chromeTemplates: Template[] = [
     preview: "chrome-screenshot",
     tags: ["chrome", "screenshot", "capture", "image"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "chrome-bookmark-manager",
@@ -1462,8 +1332,6 @@ export const chromeTemplates: Template[] = [
     preview: "chrome-bookmark-manager",
     tags: ["chrome", "bookmarks", "organization", "management"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "chrome-dark-mode",
@@ -1482,8 +1350,6 @@ export const chromeTemplates: Template[] = [
     preview: "chrome-dark-mode",
     tags: ["chrome", "dark-mode", "theme", "customization"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "chrome-productivity",
@@ -1504,8 +1370,6 @@ export const chromeTemplates: Template[] = [
     preview: "chrome-productivity",
     tags: ["chrome", "productivity", "tools", "organization"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "chrome-shopping-assistant",
@@ -1524,8 +1388,6 @@ export const chromeTemplates: Template[] = [
     preview: "chrome-shopping-assistant",
     tags: ["chrome", "shopping", "comparison", "deals"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "chrome-news-aggregator",
@@ -1545,8 +1407,6 @@ export const chromeTemplates: Template[] = [
     preview: "chrome-news-aggregator",
     tags: ["chrome", "news", "reading", "aggregator"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "chrome-social-media",
@@ -1565,8 +1425,6 @@ export const chromeTemplates: Template[] = [
     preview: "chrome-social-media",
     tags: ["chrome", "social", "media", "management"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "chrome-weather",
@@ -1585,8 +1443,6 @@ export const chromeTemplates: Template[] = [
     preview: "chrome-weather",
     tags: ["chrome", "weather", "forecast", "information"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "chrome-calculator",
@@ -1609,8 +1465,6 @@ export const chromeTemplates: Template[] = [
     preview: "chrome-calculator",
     tags: ["chrome", "calculator", "math", "tools"],
     tier: "free",
-    tier: "premium",
-
   },
   {
     id: "chrome-notepad",
@@ -1628,7 +1482,5 @@ export const chromeTemplates: Template[] = [
     preview: "chrome-notepad",
     tags: ["chrome", "notepad", "notes", "text"],
     tier: "free",
-    tier: "premium",
-
   },
 ];

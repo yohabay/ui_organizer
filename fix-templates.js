@@ -8,8 +8,28 @@ fs.readdirSync(dataDir).forEach(file => {
     const filePath = path.join(dataDir, file);
     let content = fs.readFileSync(filePath, 'utf8');
 
-    // Remove duplicate tier lines
-    content = content.replace(/(\s+tier: "(free|premium)",)\s*\1/gm, '$1');
+    // Remove all tier lines
+    content = content.replace(/^\s+tier: ".*?",\s*$/gm, '');
+
+    // Add tier after tags
+    content = content.replace(/(\s+tags: \[[\s\S]*?\],)\s*$/gm, (match, tags) => {
+      const lines = content.split('\n');
+      const lineIndex = lines.findIndex(line => line.includes(match.trim()));
+      if (lineIndex === -1) return match;
+
+      // Find the id line above
+      let idLine = '';
+      for (let i = lineIndex; i >= 0; i--) {
+        if (lines[i].includes('id:')) {
+          idLine = lines[i];
+          break;
+        }
+      }
+
+      const tier = idLine.includes('"free-') ? '"free"' : idLine.includes('"premium-') ? '"premium"' : '"free"';
+
+      return tags + '\n    tier: ' + tier + ',';
+    });
 
     fs.writeFileSync(filePath, content);
     console.log(`Fixed ${file}`);
