@@ -1261,9 +1261,8 @@ export const designerTemplates: Template[] = [
       "measurements",
       "precise",
     ],
-
+    tier: "free",
   },
-
   // Continue adding more templates to reach 50+...
   // I'll add a few more key ones to demonstrate the variety
 

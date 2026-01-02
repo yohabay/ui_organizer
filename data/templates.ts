@@ -22,6 +22,7 @@ export const templates: Template[] = [
     ],
     preview: "grid-4x2",
     tags: ["grid", "equal", "basic"],
+    tier: "free",
   },
   {
     id: "basic-3x3",
@@ -44,6 +45,7 @@ export const templates: Template[] = [
     ],
     preview: "grid-3x3",
     tags: ["grid", "equal", "square"],
+    tier: "free",
   },
   {
     id: "basic-5x2",

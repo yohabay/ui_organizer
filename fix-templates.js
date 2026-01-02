@@ -8,8 +8,9 @@ fs.readdirSync(dataDir).forEach(file => {
     const filePath = path.join(dataDir, file);
     let content = fs.readFileSync(filePath, 'utf8');
 
-    // Remove all tier lines
+    // Remove all tier and isPremium lines
     content = content.replace(/^\s+tier: ".*?",\s*$/gm, '');
+    content = content.replace(/^\s+isPremium: true,\s*$/gm, '');
 
     // Add tier after tags
     content = content.replace(/(\s+tags: \[[\s\S]*?\],)\s*$/gm, (match, tags) => {
