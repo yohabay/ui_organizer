@@ -713,7 +713,7 @@ export function ProfessionalExportEngine({
     );
     const deviceFrame = templateSlot?.deviceFrame;
 
-    if (deviceFrame && deviceFrame !== "none" && deviceFrame !== undefined) {
+    if (deviceFrame) {
       // Create device-specific frame 
       const deviceFrameWrapper = document.createElement("div"); 
       deviceFrameWrapper.style.width = "100%";
