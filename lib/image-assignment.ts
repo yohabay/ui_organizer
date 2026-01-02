@@ -47,6 +47,19 @@ const DEVICE_IMAGES = {
     "/template-previews/website/profile-9.png",
     "/template-previews/website/profile-10.png",
   ],
+  chrome: [
+    "/template-previews/website/profile.png",
+    "/template-previews/website/profile-1.png",
+    "/template-previews/website/profile-2.png",
+    "/template-previews/website/profile-3.png",
+    "/template-previews/website/profile-4.png",
+    "/template-previews/website/profile-5.png",
+    "/template-previews/website/profile-6.png",
+    "/template-previews/website/profile-7.png",
+    "/template-previews/website/profile-8.png",
+    "/template-previews/website/profile-9.png",
+    "/template-previews/website/profile-10.png",
+  ],
 };
 
 // Device aspect ratios for proper scaling
@@ -55,6 +68,7 @@ export const DEVICE_ASPECT_RATIOS = {
   tablet: 4 / 3, // iPad aspect ratio
   desktop: 16 / 9, // Desktop window aspect ratio
   website: 16 / 9, // Website browser aspect ratio
+  chrome: 2 / 3, // Chrome extension popup aspect ratio
 };
 
 // Device frame types for visual enhancement
@@ -63,6 +77,7 @@ export const DEVICE_FRAMES = {
   tablet: "tablet",
   desktop: "browser",
   website: "browser",
+  chrome: "browser",
 };
 
 // Determine the best device context for a slot based on its properties

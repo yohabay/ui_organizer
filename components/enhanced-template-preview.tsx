@@ -120,6 +120,8 @@ export function EnhancedTemplatePreview({
         return <Monitor className="w-2 h-2" />;
       case "website":
         return <Globe className="w-2 h-2" />;
+      case "chrome":
+        return <Globe className="w-2 h-2" />;
       default:
         return <Image className="w-2 h-2" />;
     }
