@@ -1,4 +1,4 @@
-export type ProjectType = "mobile" | "desktop" | "website" | "tablet";
+export type ProjectType = "mobile" | "desktop" | "website" | "tablet" | "chrome";
 
 export interface Screenshot {
   id: string;
