@@ -1,7 +1,7 @@
 import type { ProjectType, Template, TemplateSlot } from "@/types";
 
 // Device-specific image collections
-const DEVICE_IMAGES = {
+const DEVICE_IMAGES: Record<ProjectType, string[]> = {
   mobile: [
     "/template-previews/mobileapp/photo_2025-07-29_19-39-34.jpg",
     "/template-previews/mobileapp/photo_2025-07-29_19-39-36.jpg",
